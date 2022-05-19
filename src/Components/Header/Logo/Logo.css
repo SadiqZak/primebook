@@ -1,0 +1,15 @@
+.logo{
+    display: flex;
+    order: -1;
+    align-items: center;
+    text-align: center;
+    font-size: 1.56rem;
+    font-weight:500;
+    cursor: pointer;
+    color: var(--primary-color);
+
+}
+
+.logo-icon{
+    font-size: 1.56rem;
+}
