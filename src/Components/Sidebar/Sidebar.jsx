@@ -7,8 +7,8 @@ const Sidebar = () => {
         <div className="sidebar-wrap">
           <SidebarChild path={"/"} icon={"home"} comp={"Home"} />
           <SidebarChild path={"/explore"} icon={"explore"} comp={"Explore"} />
-          <SidebarChild path={"/likedposts"} icon={"favorite"} comp={"Liked Posts"} />
-          <SidebarChild path={"/bookmarks"} icon={"bookmark"} comp={"Bookmarks"} />
+          <SidebarChild path={"/favorite"} icon={"favorite"} comp={"Liked Posts"} />
+          <SidebarChild path={"/bookmark"} icon={"bookmark"} comp={"Bookmarks"} />
         </div>
       </div>
     </>
@@ -16,3 +16,5 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+// 

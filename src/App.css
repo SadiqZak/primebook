@@ -8,17 +8,29 @@
   padding: 0;
 }
 
+
 :root{
   --primary-color:#1D9BF0;
   --background-color:#F0F2F5;
   --white-color:#FFFF;
   --background-grey-color:#F5F6F7;
+  --sidebar-child-background:#D7DADF;
   --grey-color:#7F8184;
   --black-color:#212121;
+}
+
+.link-tag{
+  text-decoration: none;
+  outline: none;
+  color: var(--black-color);
 }
 
 .App{
   min-height: 100vh;
   height: max-content;
   background-color: var(--background-color);
+}
+
+.App-body{
+  display: flex;
 }
