@@ -8,8 +8,8 @@ export const Home = () => {
       <div className="middle-child">
         <FeedWall />
         <TextCard/>
-        <TextCard/>
-        <TextCard/>
+        <TextCard hasImage={true}/>
+        <TextCard hasImage={true}/>
         <TextCard/>
         <TextCard/>
         <TextCard/>

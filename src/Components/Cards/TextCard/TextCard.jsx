@@ -1,7 +1,7 @@
 import "./TextCard.css";
 import React from "react";
 
-export const TextCard = () => {
+export const TextCard = ({ hasImage }) => {
   return (
     <div>
       {" "}
@@ -24,6 +24,8 @@ export const TextCard = () => {
         <div className="post-content">
           <span>Lorem ipsum ehrn you hjabe drean chekvmiomn</span>
         </div>
+        {hasImage && <div className="post-image"></div>}
+
         <div className="post-footer">
           <div className="post-footer-child-left">
             <span className="material-icons post-footer-icons">

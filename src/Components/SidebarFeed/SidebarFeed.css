@@ -5,6 +5,8 @@
 
 .sidebarfeed-wrapper{
     margin-right: 6rem;
+    position: sticky;
+	top: 93px;
 }
 
 .sidebarfeed-header{
