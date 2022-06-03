@@ -19,14 +19,14 @@
 }
 
 .sidebar-child{
-    margin-right: 4rem;
+    margin-right: 9rem;
     width: 100%;
     height: max-content;
     padding: 0.5rem;
     border-radius: 0.1rem;
     cursor: pointer;
     display: flex;
-    text-align: center;
+    text-align: right;
     align-items: center;
     font-weight: 500;
     font-size: 1.2rem;

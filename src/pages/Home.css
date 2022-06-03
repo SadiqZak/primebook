@@ -5,66 +5,46 @@
 
 .middle-child{
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem 8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
 }
 
-.feed-container{
+.username-tag-post{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-post-card{
     padding: 1rem;
-    width: 500px;
-    min-height: 150px;
-    height: max-content;
     border: 1px solid var(--sidebar-child-background);
     box-shadow:1px 1px 1px 1px rgba(0,0,0,0.15);
     background-color: var(--white-color);
-    border-radius: 5px;
+}
+.post-header{
     display: flex;
-    flex-direction:column ;
     gap: 0.5rem;
 }
 
-.feed-primary{
-    width: 100%;
-    display: flex;
-    flex-grow: 1;
-    gap: 1rem;
-    border-bottom: 1px solid var(--sidebar-child-background);
-}
-
-.feed-input-cont{
-    display: flex;
-    flex-grow: 1;
-    height: 2rem;
-}
-
-.feed-input{
-    outline: none;
-    border: none;
-    width: 100%;
-    font-size: 1.1rem;
-}
-
-.feed-footer{
+.text-post-header-wrap{
     display: flex;
     justify-content: space-between;
 }
 
-.cta-btn{
-    border: 1px solid var(--primary-color);
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    padding: 0.2rem 0.8rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 300;
+.post-content{
+    padding: 1rem 0rem;
 }
 
-.cta-btn:hover{
-    background-color: var(--white-color);
-    color: var(--primary-color);
+.post-footer-child-left{
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid var(--background-color);
+    padding: 0.5rem 0;
 }
-.avatar-round{
-    border-radius: 50%;
-    background-color: var(--primary-color);
+
+.post-footer-icons{
+    font-size: 1.7rem;
     cursor: pointer;
 }

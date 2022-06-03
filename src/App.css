@@ -3,6 +3,7 @@
 @import url(./Components/Sidebar/Sidebar.css);
 @import url(./Components/Header/Header.css);
 @import url(./pages/Home.css);
+@import url(./Components/FeedWall/FeedWall.css);
 
 *{
   margin: 0;
@@ -15,7 +16,8 @@
   --background-color:#F0F2F5;
   --white-color:#FFFF;
   --background-grey-color:#F5F6F7;
-  --sidebar-child-background:#D7DADF;
+  /* --sidebar-child-background:#D7DADF; */
+  --sidebar-child-background:#ebecef;
   --grey-color:#7F8184;
   --black-color:#212121;
 }
