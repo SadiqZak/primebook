@@ -3,7 +3,8 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import Header from './Components/Header/Header';
 import { Route, Routes } from 'react-router-dom';
 
-import {Home} from './pages/Home';
+import {Home} from './pages/Home'; 
+import { SidebarFeed } from './Components/SidebarFeed/SidebarFeed';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/favorite" element={"Liked Posts"}/>
         <Route path="/bookmark" element={"Bookmarks"}/>
       </Routes>
+      <SidebarFeed/>
       </div>
       
     </div>
