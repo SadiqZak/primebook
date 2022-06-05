@@ -9,6 +9,8 @@ const Sidebar = () => {
           <SidebarChild path={"/explore"} icon={"explore"} comp={"Explore"} />
           <SidebarChild path={"/favorite"} icon={"favorite"} comp={"Liked Posts"} />
           <SidebarChild path={"/bookmark"} icon={"bookmark"} comp={"Bookmarks"} />
+          <SidebarChild path={"/profile"} icon={"person"} comp={"Profile"} />
+          <button className="cta-btn sidebar-btn">Post</button>
         </div>
       </div>
     </>

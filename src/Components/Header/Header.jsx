@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Logo from "./Logo/Logo";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { AuthContext } from "../../backend/utils/auth-context";
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
           <span className="search-icon material-icons">search</span>
         </div>
         <div className="header_right">
-        {/* { !auth.isAuthenticated && (
+          {/* { !auth.isAuthenticated && (
           <button
           className="login-btn"
             onClick={() => {
@@ -35,6 +35,10 @@ const Header = () => {
             Logout
           </button>
         )} */}
+          <div className="header-right">
+            <div className="avatar-round ht-35 wd-35"></div>
+            <button className="login-btn">Login</button>
+          </div>
         </div>
       </div>
     </div>

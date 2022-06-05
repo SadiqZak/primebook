@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;900&display=swap');
 
 .feed-container{
     padding: 1rem;
     flex-grow: 1;
     width: 100%;
-    min-height: 150px;
+    min-height: 180px;
     height: max-content;
     border: 1px solid var(--sidebar-child-background);
     box-shadow:1px 1px 1px 1px rgba(0,0,0,0.15);
@@ -29,10 +30,14 @@
 }
 
 .feed-input{
+    font-family: 'Roboto', sans-serif;
     outline: none;
     border: none;
     width: 100%;
+    min-height: 100px;
+    height: max-content;
     font-size: 1.1rem;
+    resize: none;
 }
 
 .feed-footer{

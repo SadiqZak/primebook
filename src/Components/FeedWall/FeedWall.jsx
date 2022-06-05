@@ -1,17 +1,25 @@
 import React from "react";
-// import "./FeedWall.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addPostToFeed } from "../../store/postSlice";
+
 
 export const FeedWall = () => {
+  const [postData, setPostData] =useState("");
+  const dispatch = useDispatch()
+
   return (
     <div>
       <div className="feed-container">
         <div className="feed-primary">
           <div className="avatar-round wd-50 ht-50"></div>
           <div className="feed-input-cont">
-            <input
+            <textarea
+              value={postData}
               className="feed-input"
               type="text"
               placeholder="What's happening?"
+              onChange={(e)=>setPostData(e.target.value)}
             />
           </div>
         </div>
@@ -25,7 +33,7 @@ export const FeedWall = () => {
             </div>
           </div>
           <div className="feed-footer-right">
-            <button className="cta-btn">Post</button>
+            <button onClick={()=>dispatch(addPostToFeed({postData}))} className="cta-btn">Post</button>
           </div>
         </div>
       </div>

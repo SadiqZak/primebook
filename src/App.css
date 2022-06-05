@@ -10,6 +10,13 @@
   padding: 0;
 }
 
+.ht-35{
+  height: 35px;
+}
+
+.wd-35 {
+  width: 35px;
+}
 
 :root{
   --primary-color:#1D9BF0;

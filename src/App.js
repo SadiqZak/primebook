@@ -6,6 +6,16 @@ import { Route, Routes } from 'react-router-dom';
 import {Home} from './pages/Home'; 
 import { SidebarFeed } from './Components/SidebarFeed/SidebarFeed';
 
+import Mockman from "mockman-js";
+
+function MockAPI() {
+  return (
+    <div className="MockAPI">
+      <Mockman />
+    </div>
+  );
+}
+
 function App() {
   return (
     <div className="App">

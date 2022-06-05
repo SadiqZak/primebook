@@ -17,6 +17,10 @@
     gap: 0.5rem;
 }
 
+.sidebar-btn{
+    margin: 1rem;
+}
+
 .sidebar-child{
     margin-right: 9rem;
     width: 100%;

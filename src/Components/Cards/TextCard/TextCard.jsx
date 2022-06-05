@@ -1,7 +1,7 @@
 import "./TextCard.css";
 import React from "react";
 
-export const TextCard = ({ hasImage }) => {
+export const TextCard = ({ hasImage, username, content, date }) => {
   return (
     <div>
       {" "}
@@ -10,11 +10,11 @@ export const TextCard = ({ hasImage }) => {
           <div className="post-header">
             <div className="avatar-round wd-50 ht-50"></div>
             <div className="username-tag-post">
-              <small>Adarsh Balika</small>
-              <small>@adarshbalika</small>
+              <small>{username}</small>
+              <small>@{username}</small>
             </div>
             <div className="date-posted">
-              <small>May 15, 2022</small>
+              <small>{date}</small>
             </div>
           </div>
           <div>
@@ -22,7 +22,7 @@ export const TextCard = ({ hasImage }) => {
           </div>
         </div>
         <div className="post-content">
-          <span>Lorem ipsum ehrn you hjabe drean chekvmiomn</span>
+          <span>{content}</span>
         </div>
         {hasImage && <div className="post-image"></div>}
 
