@@ -4,10 +4,10 @@ export const getAllPostsService = async()=>{
     return axios.get("/api/posts")
 }
 
-export const addPostService = async({postData, token})=>{
+export const addPostService = async({postData, encodedToken})=>{
     return axios.post("/api/posts", {postData}, {
         headers:{
-            authorization: token
+            authorization: encodedToken,
         }
     }) 
 }

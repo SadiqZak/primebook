@@ -2,7 +2,7 @@
 
 @import url(./Components/Sidebar/Sidebar.css);
 @import url(./Components/Header/Header.css);
-@import url(./pages/Home.css);
+@import url(./pages/Home/Home.css);
 @import url(./Components/FeedWall/FeedWall.css);
 
 *{

@@ -1,12 +1,19 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPostToFeed } from "../../store/postSlice";
 
 
 export const FeedWall = () => {
-  const [postData, setPostData] =useState("");
+  const [postData, setPostData] =useState({content:""});
+  const {token} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch()
+
+  console.log("Feedwall", token)
+
+  const postHandler = ()=>{
+    dispatch(addPostToFeed({postData, encodedToken:token}))
+  }
 
   return (
     <div>
@@ -15,11 +22,11 @@ export const FeedWall = () => {
           <div className="avatar-round wd-50 ht-50"></div>
           <div className="feed-input-cont">
             <textarea
-              value={postData}
+              value={postData.content}
               className="feed-input"
               type="text"
               placeholder="What's happening?"
-              onChange={(e)=>setPostData(e.target.value)}
+              onChange={(e)=>setPostData({content:e.target.value})}
             />
           </div>
         </div>
@@ -33,7 +40,7 @@ export const FeedWall = () => {
             </div>
           </div>
           <div className="feed-footer-right">
-            <button onClick={()=>dispatch(addPostToFeed({postData}))} className="cta-btn">Post</button>
+            <button onClick={postHandler} className="cta-btn">Post</button>
           </div>
         </div>
       </div>
