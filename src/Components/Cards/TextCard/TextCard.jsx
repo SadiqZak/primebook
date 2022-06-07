@@ -1,7 +1,13 @@
 import "./TextCard.css";
-import React from "react";
+import React, { useState } from "react";
+import { CommentsTab } from "./component/CommentsTab";
+import { useDispatch } from "react-redux";
+import { getComment } from "../../../store/postSlice";
 
-export const TextCard = ({ hasImage, username, content, date }) => {
+export const TextCard = ({ hasImage, username, content, date, postId,comments }) => {
+  const [clicked, setClicked] = useState(false)
+  const dispatch = useDispatch()
+
   return (
     <div>
       {" "}
@@ -31,14 +37,32 @@ export const TextCard = ({ hasImage, username, content, date }) => {
             <span className="material-icons post-footer-icons">
               favorite_border
             </span>
-            <span className="material-icons post-footer-icons">
+            <span onClick ={()=>setClicked((prev)=>!prev)} className="material-icons post-footer-icons">
               chat_bubble_outline
             </span>
+            {
+              clicked&& 
+             <CommentsTab comments={comments} setClicked={setClicked} postId={postId}/>
+            }
             <span className="material-icons post-footer-icons">
               bookmark_border
             </span>
           </div>
         </div>
+        <div>{comments!=[] &&
+        <div>
+          <div className="flex">
+            <div className="avatar-round ht-35 wd-35"></div>
+            <div className="flex-column">
+            {comments[0]?.username}
+            <small> {`@${comments[0]?.username}`}</small>
+            </div>
+          </div>
+          <div>
+          {comments[0]?.text?.content}
+          </div>
+        </div>
+         }</div>
       </div>
     </div>
   );

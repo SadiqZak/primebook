@@ -15,6 +15,15 @@
     gap: 0.5rem;
 }
 
+.flex{
+    display: flex;
+    gap: 0.2rem;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
 .text-post-header-wrap{
     display: flex;
     justify-content: space-between;

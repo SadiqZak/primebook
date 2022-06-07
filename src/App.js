@@ -29,6 +29,7 @@ function App() {
         <Route path="/favorite" element={"Liked Posts"}/>
         <Route path="/bookmark" element={"Bookmarks"}/>
         <Route path="/login" element = {<Login/>}/>
+        <Route path="/mockman" element = {<Mockman/>}/>
       </Routes>
       <SidebarFeed/>
       </div>

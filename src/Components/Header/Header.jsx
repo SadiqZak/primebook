@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import { AuthContext } from "../../backend/utils/auth-context";
 
 const Header = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   // const { auth, setAuth} = useContext(AuthContext)
   return (
     <div className="header">
@@ -37,7 +37,7 @@ const Header = () => {
         )} */}
           <div className="header-right">
             <div className="avatar-round ht-35 wd-35"></div>
-            <button className="login-btn">Login</button>
+            <button onClick={()=>navigate('/login')}className="login-btn">Login</button>
           </div>
         </div>
       </div>

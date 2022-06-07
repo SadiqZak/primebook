@@ -11,3 +11,19 @@ export const addPostService = async({postData, encodedToken})=>{
         }
     }) 
 }
+
+export const addCommentService = async({postId, commentData, encodedToken})=>{
+     return axios.post(`/api/comments/add/${postId}`, {commentData}, {
+        headers:{
+            authorization: encodedToken,
+        }
+    })
+}
+
+export const getCommentsService = async({postId, encodedToken})=>{
+    return axios.get(`/api/comments/${postId}`,{
+        headers:{
+            authorization:encodedToken,
+        }
+    })
+}
