@@ -81,12 +81,17 @@ export const deletePost = createAsyncThunk('posts/deletePost', async({postId, en
     }
 })
 
-const posts = createSlice({
+const postsSlice = createSlice({
     name:"posts",
     initialState:{
-        posts:[]
+        posts:[],
+        sortSelectState:"Latest"
     },
-    reducer:{},
+    reducers:{
+        changeSorting: (state, action) => {
+            state.sortSelectState = action.payload;
+          },
+    },
     extraReducers:{
         [getAllPosts.fulfilled]:(state,action)=>{
             state.posts = action.payload
@@ -144,4 +149,5 @@ const posts = createSlice({
 })
 
 
-export default posts.reducer
+export default postsSlice.reducer;
+export const {changeSorting} = postsSlice.actions;
