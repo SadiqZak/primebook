@@ -12,12 +12,12 @@ export const posts = [
     content:
       "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
     likes: {
-      likeCount: 0,
+      likeCount: 99,
       likedBy: [],
       dislikedBy: [],
     },
     comments:[],
-    username: "adarshbalika",
+    username: "mrnags",
     createdAt: "2022-06-06T13:34:40",
     updatedAt: formatDate(),
   },
@@ -40,7 +40,7 @@ export const posts = [
     content:
       "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
     likes: {
-      likeCount: 0,
+      likeCount: 1,
       likedBy: [],
       dislikedBy: [],
     },

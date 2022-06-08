@@ -44,3 +44,19 @@ export const dislikePostService = async({postId, encodedToken})=>{
         }
     })
 }
+
+export const editPostService = async({postId, encodedToken, postData})=>{
+    return axios.post(`/api/posts/edit/${postId}`,{postData},{
+        headers:{
+            authorization:encodedToken
+        }
+    })
+}
+
+export const deletePostService = async({postId, encodedToken})=>{
+    return axios.delete(`/api/posts/${postId}`,{
+        headers:{
+            authorization: encodedToken
+        }
+    })
+}
