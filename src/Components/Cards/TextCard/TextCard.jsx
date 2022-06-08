@@ -1,12 +1,33 @@
 import "./TextCard.css";
 import React, { useState } from "react";
 import { CommentsTab } from "./component/CommentsTab";
-import { useDispatch } from "react-redux";
-import { getComment } from "../../../store/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { dislikePost, likePost } from "../../../store/postSlice";
 
-export const TextCard = ({ hasImage, username, content, date, postId,comments }) => {
-  const [clicked, setClicked] = useState(false)
-  const dispatch = useDispatch()
+export const TextCard = ({
+  hasImage,
+  username,
+  content,
+  date,
+  postId,
+  comments,
+  likes
+}) => {
+  const [clicked, setClicked] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const {token} = useSelector((store)=>store.authenticate)
+  const dispatch = useDispatch();
+
+  const likedHandler =()=>{
+    if(liked){
+      dispatch(dislikePost({postId: postId, encodedToken: token}))
+      setLiked((prev)=>!prev)
+    }else{
+      dispatch(likePost({postId: postId, encodedToken: token}))
+      setLiked((prev)=>!prev)
+    }
+    
+  }
 
   return (
     <div>
@@ -34,35 +55,57 @@ export const TextCard = ({ hasImage, username, content, date, postId,comments })
 
         <div className="post-footer">
           <div className="post-footer-child-left">
-            <span className="material-icons post-footer-icons">
+            {
+              !liked && <span onClick={likedHandler} className="material-icons post-footer-icons">
               favorite_border
             </span>
-            <span onClick ={()=>setClicked((prev)=>!prev)} className="material-icons post-footer-icons">
+            
+            }
+            {
+              liked && <span onClick={likedHandler} className="material-icons post-footer-icons">
+              favorite
+            </span>
+            }
+            {
+              likes.likeCount>0 && <span>{likes.likeCount}</span>
+            }
+            
+            <span
+              onClick={() => setClicked((prev) => !prev)}
+              className="material-icons post-footer-icons"
+            >
               chat_bubble_outline
             </span>
-            {
-              clicked&& 
-             <CommentsTab comments={comments} setClicked={setClicked} postId={postId}/>
-            }
+            {clicked && (
+              <CommentsTab
+                comments={comments}
+                setClicked={setClicked}
+                postId={postId}
+              />
+            )}
             <span className="material-icons post-footer-icons">
               bookmark_border
             </span>
           </div>
         </div>
-        <div>{comments!=[] &&
         <div>
-          <div className="flex">
-            <div className="avatar-round ht-35 wd-35"></div>
-            <div className="flex-column">
-            {comments[0]?.username}
-            <small> {`@${comments[0]?.username}`}</small>
+          {comments && (
+            <div>
+              <div>
+                {comments[0]?.username && (
+                  <div className="flex">
+                    <div className="avatar-round ht-35 wd-35"></div>
+                    <div className="flex-column">
+                      {comments[0]?.username}
+                      <small> {`@${comments[0]?.username}`}</small>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div>{comments[0]?.text?.content}</div>
             </div>
-          </div>
-          <div>
-          {comments[0]?.text?.content}
-          </div>
+          )}
         </div>
-         }</div>
       </div>
     </div>
   );

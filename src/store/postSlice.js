@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addCommentService, addPostService, getAllPostsService, getCommentsService } from "../services/postService";
+import { addCommentService, addPostService, dislikePostService, getAllPostsService, getCommentsService, likePostService } from "../services/postService";
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async()=>{
     try{
@@ -42,6 +42,26 @@ export const getComment = createAsyncThunk('posts/getComment',async({postId, enc
     }
 })
 
+export const likePost = createAsyncThunk('posts/likePost', async({postId, encodedToken})=>{
+    // console.log(postId, encodedToken)
+    try{
+        const response = await likePostService({postId, encodedToken})
+        // console.log(response)
+        return response.data.posts
+    }catch(err){
+        console.error(err)
+    }
+})
+
+export const dislikePost = createAsyncThunk('posts/dislikePost', async({postId, encodedToken})=>{
+    try{
+        const response = await dislikePostService({postId, encodedToken})
+        return response.data.posts
+    }catch(err){
+        console.error(err)
+    }
+})
+
 const posts = createSlice({
     name:"posts",
     initialState:{
@@ -72,6 +92,20 @@ const posts = createSlice({
             state.posts = action.payload
         },
         [getComment.rejected]:(action)=>{
+            console.error(action.payload)
+        },
+        [likePost.fulfilled]:(state, action)=>{
+            console.log(action.payload)
+            state.posts = action.payload
+        },
+        [likePost.rejected]:(action)=>{
+            console.error(action.payload)
+        },
+        [dislikePost.fulfilled]:(state, action)=>{
+            console.log(action.payload)
+            state.posts = action.payload
+        },
+        [dislikePost.rejected]: (action)=>{
             console.error(action.payload)
         }
     }

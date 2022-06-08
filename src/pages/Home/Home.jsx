@@ -24,7 +24,7 @@ const feedData = filterData(newPosts, "Latest")
       <div className="middle-child">
         <FeedWall />
         {feedData?.map((post)=>(
-          <TextCard key={post._id} postId={post._id} comments={post.comments} username={post.username} content={post.content} date={post.createdAt}/>
+          <TextCard key={post._id} likes={post.likes} postId={post._id} comments={post.comments} username={post.username} content={post.content} date={post.createdAt}/>
         ))}
       </div>
     </div>
