@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { CommentsTab } from "./component/CommentsTab";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
+import { getUserPosts, getUserProfiles } from "../../../store/profileSlice";
+import { useNavigate } from "react-router-dom";
 
 export const TextCard = ({
   hasImage,
@@ -11,7 +13,8 @@ export const TextCard = ({
   date,
   postId,
   comments,
-  likes
+  likes,
+  userId
 }) => {
   const [clicked, setClicked] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -20,6 +23,8 @@ export const TextCard = ({
   const [textContent, setTextContent] = useState({content:content})
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
+  const {userProfile} = useSelector((store)=>store.profile)
+  const navigate= useNavigate()
 
 
   const likedHandler =()=>{
@@ -38,13 +43,19 @@ export const TextCard = ({
     dispatch(editPost({postId:postId, postData: textContent, encodedToken:token }))
   }
 
+  const avatarClickHandler = ()=>{
+    dispatch(getUserProfiles({encodedToken:token}))
+    dispatch(getUserProfiles({userId:userProfile[0]._id,encodedToken:token}))
+    navigate("/profile")
+  }
+
   return (
     <div>
       {" "}
       <div className="text-post-card">
         <div className="text-post-header-wrap">
           <div className="post-header">
-            <div className="avatar-round wd-50 ht-50"></div>
+            <div onClick={avatarClickHandler} className="avatar-round wd-50 ht-50"></div>
             <div className="username-tag-post">
               <small>{username}</small>
               <small>@{username}</small>
