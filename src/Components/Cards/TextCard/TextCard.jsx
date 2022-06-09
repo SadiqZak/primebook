@@ -44,9 +44,8 @@ export const TextCard = ({
   }
 
   const avatarClickHandler = ()=>{
-    dispatch(getUserProfiles({encodedToken:token}))
-    dispatch(getUserProfiles({userId:userProfile[0]._id,encodedToken:token}))
-    navigate("/profile")
+    // navigate("/profile")
+    return
   }
 
   return (

@@ -83,3 +83,7 @@
     min-height: 10rem;
     background-color: var(--primary-color);
 }
+
+.profile-bio{
+    width: 80%;
+}

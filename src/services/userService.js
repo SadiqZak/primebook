@@ -1,17 +1,13 @@
 import axios from "axios"
 
-export const getUserPostsService = async({userId, encodedToken})=>{
-    return axios.get(`/api/users/${userId}`,{
-        headers:{
-            authorization: encodedToken,
-        }
-    })
+export const getUserPostsService = async({username})=>{
+    return axios.get(`/api/posts/user/${username}`)
 }
 
-export const getUserProfileService = async({encodedToken})=>{
-    return axios.get(`/api/users`, {
-        headers:{
-            authorization:encodedToken
-        }
-    })
+export const getUserProfileService = async({username})=>{
+    return axios.get(`/api/users/${username}`)
+}
+
+export const getAllUserService = async()=>{
+    return axios.get(`/api/users`)
 }

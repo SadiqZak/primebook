@@ -42,6 +42,7 @@ export const getPostHandler = function (schema, request) {
  * */
 
 export const getAllUserPostsHandler = function (schema, request) {
+  // debugger
   const { username } = request.params;
   try {
     const posts = schema.posts.where({ username })?.models;

@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getUserPostsService, getUserProfileService } from "../services/userService"
 
-export const getUserProfiles = createAsyncThunk('profile/getUserProfiles',async({encodedToken})=>{
+export const getUserProfile = createAsyncThunk('profile/getUserProfile',async(username)=>{
     try{
-        const response = await getUserProfileService({encodedToken})
-        return response.data.users
+        const response = await getUserProfileService(username)
+        return response.data.user
     }catch(err){
         console.error(err)
     }
 })
 
-export const getUserPosts = createAsyncThunk("profile/getUserPosts", async({userId, encodedToken})=>{
+export const getUserPosts = createAsyncThunk("profile/getUserPosts", async({username})=>{
     try{
-        const response = await getUserPostsService({userId, encodedToken})
+        const response = await getUserPostsService({username})
         return response.data.posts
     }catch(err){
         console.error(err)
@@ -22,22 +22,22 @@ export const getUserPosts = createAsyncThunk("profile/getUserPosts", async({user
 export const profileSlice = createSlice({
     name:"profile",
     initialState:{
-        posts:[],
-        userProfile:[]
+        userPosts:[],
+        userProfile:{}
     },
     reducers:{},
     extraReducers:{
         [getUserPosts.fulfilled]:(state, action)=>{
-            console.log(action.payload)
-            state.posts=action.payload
+            state.userPosts=action.payload
         },
         [getUserPosts.rejected]:(action)=>{
             console.log(action.payload)
         },
-        [getUserProfiles.fulfilled]:(state, action)=>{
+        [getUserProfile.fulfilled]:(state, action)=>{
+            console.log(action.payload)
             state.userProfile =action.payload
         },
-        [getUserProfiles.rejected]:( action)=>{
+        [getUserProfile.rejected]:( action)=>{ 
             console.log(action.payload)
         },
     }

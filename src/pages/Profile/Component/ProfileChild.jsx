@@ -1,7 +1,8 @@
 import React from 'react'
 
 export const ProfileChild = ({userProfile}) => {
-    let userProfileChild = userProfile[0]
+   let userProfileChild = userProfile
+  
   return (
     <div>
           {/* profile-card */}
@@ -25,10 +26,10 @@ export const ProfileChild = ({userProfile}) => {
                 </div>
                 <div className="profile-body">
                     <div className="profile-bio">
-                        lorem ipsum check!
+                        The way I see it, If you want the rainbow you gotta put up with the rain!
                     </div>
                     <div className="profile-info">
-                        <small>://link/random</small>
+                        <a href='https://mo-zak.netlify.app/'>https://mo-zak.netlify.app/</a>
                         <div className='profile-info-child'><span className='material-icons'>calendar_month</span> Joined August 2020</div>
                     </div>
                 </div>
