@@ -1,14 +1,19 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import '../Profile.css'
 
 export const ProfileChild = ({userProfile}) => {
    let userProfileChild = userProfile
+   const [imageFile, setImageFile] = useState([])
   
   return (
     <div>
           {/* profile-card */}
           <div className="profile-container">
                 <div className="cover-photo"></div>
-                <div className="avatar-round profile-avatar ht-100 wd-100"></div>
+                <div className="avatar-round profile-avatar ht-100 wd-100">
+                    <img source="../../../Assets/profile.jpg"/>
+                </div>
                 <div className="profile-content">
                 <div className="profile-header">
                     <div className="profile-header-left">
@@ -22,6 +27,11 @@ export const ProfileChild = ({userProfile}) => {
                         <button className='profile-cta-btn'>
                             Edit Profile
                         </button>
+                        <div>
+                        <input type="file" name="file" id="file" className="inputfile" />
+                        <label for="file">Update Picture</label>
+                        </div>
+                        
                     </div>
                 </div>
                 <div className="profile-body">

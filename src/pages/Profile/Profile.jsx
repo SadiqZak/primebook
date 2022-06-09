@@ -15,7 +15,7 @@ export const Profile = () => {
     useEffect(()=>{
       dispatch(getUserPosts({username:"adarshbalika"}))
       dispatch(getUserProfile({username:"adarshbalika"}))
-    }, [username, userProfile, dispatch])
+    }, [username, userProfile])
 
   return (
     <div className='middle-container'>

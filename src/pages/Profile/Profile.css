@@ -30,6 +30,9 @@
     background-color: var(--grey-color);
     position: absolute;
     top: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-content{
@@ -42,6 +45,11 @@
     padding: 0.5rem 1rem;
     display: flex;
     justify-content: space-between;
+}
+
+.profile-header-right{
+    display: flex;
+    gap: 0.3rem;
 }
 
 .profile-header-left{
@@ -86,4 +94,40 @@
 
 .profile-bio{
     width: 80%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    color: var(--black-color);
+    background-color: var(--background-color);
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
 }

@@ -34,7 +34,6 @@ export const profileSlice = createSlice({
             console.log(action.payload)
         },
         [getUserProfile.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.userProfile =action.payload
         },
         [getUserProfile.rejected]:( action)=>{ 
