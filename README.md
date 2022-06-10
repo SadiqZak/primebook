@@ -13,8 +13,6 @@ Social Media App
 ** User Feed
 ** Sort by Date, Trending & Recent
 * User Profile
-** Add Profile Picture
-** Add Background Image → P1
 ** Bio
 ** Portfolio URL
 * Follow/Unfollow
