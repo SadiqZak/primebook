@@ -2,7 +2,7 @@ import "./TextCard.css";
 import React, { useState } from "react";
 import { CommentsTab } from "./component/CommentsTab";
 import { useDispatch, useSelector } from "react-redux";
-import { dislikePost, likePost } from "../../../store/postSlice";
+import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
 
 export const TextCard = ({
   hasImage,
@@ -15,8 +15,12 @@ export const TextCard = ({
 }) => {
   const [clicked, setClicked] = useState(false);
   const [liked, setLiked] = useState(false);
-  const {token} = useSelector((store)=>store.authenticate)
+  const [editPostClick, setEditPostClick]= useState(false)
+  const [more, setMore] = useState(false)
+  const [textContent, setTextContent] = useState({content:content})
+  const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
+
 
   const likedHandler =()=>{
     if(liked){
@@ -27,6 +31,11 @@ export const TextCard = ({
       setLiked((prev)=>!prev)
     }
     
+  }
+
+  const editPostHandler = ()=>{
+    setEditPostClick((prev)=>!prev)
+    dispatch(editPost({postId:postId, postData: textContent, encodedToken:token }))
   }
 
   return (
@@ -44,12 +53,44 @@ export const TextCard = ({
               <small>{date}</small>
             </div>
           </div>
-          <div>
-            <span className="material-icons">more_vert</span>
+          {
+            user?.username === username &&
+            <div>
+            <span onClick = {()=> setMore((prev)=>!prev)} className="material-icons edit-delete-icon">more_vert</span>
+            {
+              more &&
+            <div className="dropdown">
+              <span onClick={()=>{setEditPostClick((prev)=>!prev); setMore((prev)=>!prev)}} className="dropdown-child">edit</span>
+              <div className="border"></div>
+              <span onClick={()=>dispatch(deletePost({postId:postId, encodedToken: token}))} className="dropdown-child">delete</span>
+            </div>
+            }
+           
+            
           </div>
+          }
+        
         </div>
         <div className="post-content">
-          <span>{content}</span>
+          {user?.username===username &&
+            <div>
+              {
+            editPostClick && 
+            <div>
+            <textarea className="edit-delete-post" value={textContent.content} onChange={(e)=>setTextContent({content: e.target.value})}></textarea>
+            <button onClick={editPostHandler} className="cta-btn">ok</button>
+            </div>
+          }
+          {
+            !editPostClick && <span>{content}</span>
+          }
+            </div>
+          }
+          {user?.username!==username &&
+            <span>{content}</span>
+          }
+          
+          
         </div>
         {hasImage && <div className="post-image"></div>}
 
@@ -93,8 +134,8 @@ export const TextCard = ({
             <div>
               <div>
                 {comments[0]?.username && (
-                  <div className="flex">
-                    <div className="avatar-round ht-35 wd-35"></div>
+                  <div className="comment-tab">
+                    <div className="avatar-round ht-20 wd-20"></div>
                     <div className="flex-column">
                       {comments[0]?.username}
                       <small> {`@${comments[0]?.username}`}</small>
@@ -102,7 +143,7 @@ export const TextCard = ({
                   </div>
                 )}
               </div>
-              <div>{comments[0]?.text?.content}</div>
+              <small>{comments[0]?.text?.content}</small>
             </div>
           )}
         </div>

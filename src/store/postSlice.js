@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addCommentService, addPostService, dislikePostService, getAllPostsService, getCommentsService, likePostService } from "../services/postService";
+import { compose, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addCommentService, addPostService, deletePostService, dislikePostService, editPostService, getAllPostsService, getCommentsService, likePostService } from "../services/postService";
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async()=>{
     try{
@@ -46,8 +46,9 @@ export const likePost = createAsyncThunk('posts/likePost', async({postId, encode
     // console.log(postId, encodedToken)
     try{
         const response = await likePostService({postId, encodedToken})
-        // console.log(response)
-        return response.data.posts
+        if(response.status === 201){ //201 is a create status code //HTTP status code 
+            return response.data.posts
+        }
     }catch(err){
         console.error(err)
     }
@@ -56,6 +57,24 @@ export const likePost = createAsyncThunk('posts/likePost', async({postId, encode
 export const dislikePost = createAsyncThunk('posts/dislikePost', async({postId, encodedToken})=>{
     try{
         const response = await dislikePostService({postId, encodedToken})
+        return response.data.posts
+    }catch(err){
+        console.error(err)
+    }
+})
+
+export const editPost = createAsyncThunk('posts/editPost',async({postData, postId, encodedToken})=>{
+    try{
+        const response = await editPostService({postId, postData, encodedToken})
+        return response.data.posts
+    }catch(err){
+        console.error(err)
+    }
+})
+
+export const deletePost = createAsyncThunk('posts/deletePost', async({postId, encodedToken})=>{
+    try{
+        const response = await deletePostService({postId, encodedToken})
         return response.data.posts
     }catch(err){
         console.error(err)
@@ -106,6 +125,19 @@ const posts = createSlice({
             state.posts = action.payload
         },
         [dislikePost.rejected]: (action)=>{
+            console.error(action.payload)
+        },
+        [editPost.fulfilled]:(state, action)=>{
+            console.log(action.payload)
+            state.posts = action.payload
+        },
+        [editPost.rejected]:(action)=>{
+            console.error(action.payload)
+        },
+        [deletePost.fulfilled]:(state, action)=>{
+            state.posts = action.payload
+        },
+        [deletePost.rejected]:(action)=>{
             console.error(action.payload)
         }
     }
