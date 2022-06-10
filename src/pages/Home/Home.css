@@ -1,0 +1,13 @@
+.middle-container{
+    display: flex;
+    flex-grow: 1;
+}
+
+.middle-child{
+    margin: 0 auto;
+    padding: 1rem 8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+}

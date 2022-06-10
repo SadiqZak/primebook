@@ -1,0 +1,76 @@
+@import url(./Logo/Logo.css);
+
+.header{ 
+    position:sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--white-color);
+    border-bottom: 1px solid var(--background-grey-color);
+    box-shadow:0 0 0 1px rgba(0,0,0,0.1);
+}
+
+.header-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--menu-bar);
+    position: relative;
+}
+
+.search{
+    flex-grow: 0.4;
+    order: 0;
+    display: flex;
+    text-align: center;
+    border: 1px solid var(--button-color);
+    box-shadow:1px 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.search input{
+    flex-grow: 1;
+    padding: 0.6rem;
+    border: none;
+    outline: none;
+    background-color: var(--background-color);
+}
+
+.search-icon{
+    width: 3.125rem;
+    padding:0.6rem;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--background-grey-color);
+}
+
+.login-btn{
+    height: fit-content;
+    align-items: center;
+    border: none;
+    border-radius: 0.2rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    font-weight:500;
+    cursor: pointer;
+}
+
+.header-right{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    order: 1;
+}
+
+
+@media screen and (max-width: 600px) {
+    .search{
+        order: 1;
+    }
+    .header-right{
+        order: 0;
+    } 
+  }
