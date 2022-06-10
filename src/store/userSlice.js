@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllUserService, followUserServices } from "../services/userService";
+import { getAllUserService, followUserServices, bookMarkService, removeBookMarkService } from "../services/userService";
 
 export const getAllUsers = createAsyncThunk(`profile/getUsers`, async () => {
   try {
@@ -22,15 +22,35 @@ export const followUser = createAsyncThunk(
   }
 );
 
+export const bookmarkPost = createAsyncThunk('posts/bookmarkPost', async({postId, encodedToken})=>{
+  try{
+      const response = await bookMarkService({postId, encodedToken})
+      return response.data.bookmarks
+  }catch(err){
+      console.error(err)
+  }
+})
+
+export const removeBookmark = createAsyncThunk('posts/removeBookmark', async({postId, encodedToken})=>{
+  try{
+    const response = await removeBookMarkService({postId, encodedToken})
+    return response.data.bookmarks
+  }catch(err){
+    console.error(err)
+}
+})
+
 export const userSlice = createSlice({
   name: "users",
   initialState: {
     users: [],
     currentUser: "",
+    currUserBookmark:[]
   },
   reducers: {
     updateCurrUser: (state, action) => {
       state.currentUser = action.payload;
+  
     },
   },
   extraReducers: {
@@ -54,7 +74,25 @@ export const userSlice = createSlice({
     [followUser.rejected]: (action) => {
       console.error(action);
     },
+    [bookmarkPost.fulfilled]:(state, action)=>{
+      state.currUserBookmark = [...state.users].filter((user)=>
+        action.payload[0].username === user.username
+      )
+      state.currUserBookmark[0].bookmarks = action.payload
   },
+  [bookmarkPost.rejected]:(action)=>{
+      console.log(action.payload)
+  }
+  },
+  [removeBookmark.fulfilled]:(state, action)=>{
+    state.currUserBookmark = [...state.users].filter((user)=>
+    action.payload[0].username === user.username
+  )
+  state.currUserBookmark[0].bookmarks = action.payload
+  },
+  [removeBookmark.rejected]:(action)=>{
+    console.log(action.payload)
+  }
 });
 
 export default userSlice.reducer;

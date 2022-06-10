@@ -22,3 +22,19 @@ export const followUserServices = async({followUserId, encodedToken}) =>
       },
     },
   );
+
+  export const bookMarkService = async({postId, encodedToken})=>{
+    return axios.post(`/api/users/bookmark/${postId}`, {}, {
+        headers:{
+            authorization: encodedToken
+        }
+    })
+}
+
+export const removeBookMarkService = async({postId, encodedToken})=>{
+  return axios.post(`/api/users/remove-bookmark/${postId}`,{},{
+    headers:{
+      authorization:encodedToken
+    }
+  })
+}

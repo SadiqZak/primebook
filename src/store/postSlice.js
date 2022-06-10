@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addCommentService, addPostService, deletePostService, dislikePostService, editPostService, getAllPostsService, getCommentsService, likePostService } from "../services/postService";
+import { addCommentService, addPostService, bookMarkService, deletePostService, dislikePostService, editPostService, getAllPostsService, getCommentsService, likePostService } from "../services/postService";
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async()=>{
     try{
@@ -81,6 +81,7 @@ export const deletePost = createAsyncThunk('posts/deletePost', async({postId, en
     }
 })
 
+
 const postsSlice = createSlice({
     name:"posts",
     initialState:{
@@ -144,7 +145,7 @@ const postsSlice = createSlice({
         },
         [deletePost.rejected]:(action)=>{
             console.error(action.payload)
-        }
+        }, 
     }
 })
 

@@ -22,8 +22,6 @@ export const Home = () => {
     finalList = [user.username]
   } 
 
-  console.log(users)
-
   useEffect(()=>{
     dispatch(getAllPosts())
   },[])
