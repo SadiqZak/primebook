@@ -11,8 +11,6 @@ const SidebarChild = ({ icon, comp, path, sidebarState, setSidebarState }) => {
             <div>{comp}</div>
           </div>
       </Link>
-        
-      
     </>
   );
 };

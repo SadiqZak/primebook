@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import Logo from "./Logo/Logo";
-import { useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { useNavigate, Link } from "react-router-dom";
+import { updateCurrUser } from "../../store/userSlice";
 // import { AuthContext } from "../../backend/utils/auth-context";
 
 const Header = () => {
   const navigate = useNavigate()
   // const { auth, setAuth} = useContext(AuthContext)
+  const dispatch = useDispatch()
   return (
     <div className="header">
       <div className="header-wrapper">
@@ -33,10 +36,13 @@ const Header = () => {
             }}
           >
             Logout
-          </button>
+          </button> 
         )} */}
           <div className="header-right">
-            <div className="avatar-round ht-35 wd-35"></div>
+            <Link onClick={()=>dispatch(updateCurrUser("adarshbalika"))} to="/profile"><div className="avatar-round ht-35 wd-35"></div></Link>
+              
+            
+            
             <button onClick={()=>navigate('/login')}className="login-btn">Login</button>
           </div>
         </div>

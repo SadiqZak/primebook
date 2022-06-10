@@ -11,3 +11,14 @@ export const getUserProfileService = async({username})=>{
 export const getAllUserService = async()=>{
     return axios.get(`/api/users`)
 }
+
+export const followUserServices = async({followUserId, encodedToken}) =>
+  axios.post(
+    `/api/users/follow/${followUserId}`,
+    {},
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    },
+  );

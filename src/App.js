@@ -36,7 +36,6 @@ function App() {
         <Route path="/profile" element = {<Profile/>}/>
         <Route path="/mockman" element = {<Mockman/>}/>
       </Routes>
-      <SidebarFeed/>
       </div>
       
     </div>

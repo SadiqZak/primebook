@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import '../Profile.css'
 
 export const ProfileChild = ({userProfile}) => {
-   let userProfileChild = userProfile
    const [imageFile, setImageFile] = useState([])
+   const {user} = useSelector((store)=>store.authenticate)
   
   return (
     <div>
@@ -19,34 +20,35 @@ export const ProfileChild = ({userProfile}) => {
                     <div className="profile-header-left">
                        
                         <div className="profile-username-container">
-                            <span>{userProfileChild?.username}</span>
-                            <small>{`@${userProfileChild?.username}`}</small>
+                            <span>{`${userProfile?.firstName} ${userProfile?.lastName}`}</span>
+                            <small>{`@${userProfile?.username}`}</small>
                         </div>
                     </div>
                     <div className="profile-header-right">
                         <button className='profile-cta-btn'>
                             Edit Profile
                         </button>
-                        <div>
-                        <input type="file" name="file" id="file" className="inputfile" />
-                        <label for="file">Update Picture</label>
-                        </div>
-                        
                     </div>
                 </div>
                 <div className="profile-body">
                     <div className="profile-bio">
-                        The way I see it, If you want the rainbow you gotta put up with the rain!
+                        {userProfile.bio}
                     </div>
                     <div className="profile-info">
-                        <a href='https://mo-zak.netlify.app/'>https://mo-zak.netlify.app/</a>
+                        <a href={`${userProfile.website}`}>{userProfile.website}</a>
                         <div className='profile-info-child'><span className='material-icons'>calendar_month</span> Joined August 2020</div>
                     </div>
                 </div>
                 <div className="profile-footer">
-                    <span>3 Posts</span>
                     <span>10 Followers</span>
                     <span>5 Following</span>
+                    {
+                        userProfile.username !== user.username &&
+                    <button className='profile-cta-btn'>
+                        unfollow
+                    </button>
+                    }
+                   
                 </div>
                 </div>
             </div>

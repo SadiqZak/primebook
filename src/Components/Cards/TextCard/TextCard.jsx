@@ -1,9 +1,11 @@
 import "./TextCard.css";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { CommentsTab } from "./component/CommentsTab";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
-import { getUserPosts, getUserProfiles } from "../../../store/profileSlice";
+import { updateCurrUser } from "../../../store/userSlice";
+// import { getUserPosts, getUserProfiles } from "../../../store/profileSlice";
 import { useNavigate } from "react-router-dom";
 
 export const TextCard = ({
@@ -43,18 +45,15 @@ export const TextCard = ({
     dispatch(editPost({postId:postId, postData: textContent, encodedToken:token }))
   }
 
-  const avatarClickHandler = ()=>{
-    // navigate("/profile")
-    return
-  }
-
   return (
     <div>
       {" "}
       <div className="text-post-card">
         <div className="text-post-header-wrap">
           <div className="post-header">
-            <div onClick={avatarClickHandler} className="avatar-round wd-50 ht-50"></div>
+          <Link onClick={()=>dispatch(updateCurrUser(username))} className="feedbar-link-tag" to="/profile">
+            <div className="avatar-round wd-50 ht-50"></div>
+          </Link>
             <div className="username-tag-post">
               <small>{username}</small>
               <small>@{username}</small>

@@ -10,7 +10,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
+      "RCB hyaas won haarts yevry IPL",
     likes: {
       likeCount: 98,
       likedBy: [],
@@ -24,7 +24,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
+      "Hey Guys, I just joined a new startup",
     likes: {
       likeCount: 1,
       likedBy: [],
@@ -38,7 +38,7 @@ export const posts = [
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
+      "Dhanush is an underrated singer!",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -59,14 +59,14 @@ export const posts = [
       dislikedBy: [],
     },
     comments:[],
-    username: "superCoder",
+    username: "supercoder",
     createdAt: "2022-06-02T13:34:40",
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
     content:
-      "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
+      "Why is life so tough?",
     likes: {
       likeCount: 99,
       likedBy: [],
@@ -77,7 +77,36 @@ export const posts = [
     createdAt: "2022-06-02T13:34:40",
     updatedAt: formatDate(),
   },
+  {
+    _id: uuid(),
+    content:
+      "just completed 3 Macro Projects!",
+    likes: {
+      likeCount: 9,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments:[],
+    username: "adarshbalika",
+    createdAt: "2022-06-02T13:34:40",
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content:
+      "I wish we could go back in time, from time to time",
+    likes: {
+      likeCount: 9,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments:[],
+    username: "adarshbalika",
+    createdAt: "2022-06-02T13:34:40",
+    updatedAt: formatDate(),
+  },
 ];
+
 
 
 //"2022-09-10T23:34:40"

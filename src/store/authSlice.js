@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginService } from "../services/authService";
+import { editUserServices, loginService } from "../services/authService";
 
 export const authoriseUser = createAsyncThunk("authorisation/authoriseUser",async({username, password})=>{
     try{
@@ -12,6 +12,18 @@ export const authoriseUser = createAsyncThunk("authorisation/authoriseUser",asyn
         console.error(err)
     }
 })
+
+export const editUserProfile = createAsyncThunk(
+    "authorisation/editUserProfile",
+    async ({ userData, encodedToken }) => {
+      try {
+        const response = await editUserServices({userData, encodedToken});
+        return response.data.user;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  );
 
 const authSlice = createSlice({
     name:"authorisation",
@@ -34,6 +46,12 @@ const authSlice = createSlice({
         },
         [authoriseUser.rejected]:(state, action)=>{
             state.isAuthenticated = false
+            console.error(action.payload)
+        },
+        [editUserProfile.fulfilled]:(state, action)=>{
+            state.user = action.payload
+        },
+        [editUserProfile.rejected]:(action)=>{
             console.error(action.payload)
         }
     }

@@ -1,0 +1,6 @@
+.feedbar-link-tag{
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    gap: 0.2rem;
+}
