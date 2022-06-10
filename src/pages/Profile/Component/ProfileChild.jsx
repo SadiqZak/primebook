@@ -27,10 +27,10 @@ export const ProfileChild = ({userProfile}) => {
                         <button className='profile-cta-btn'>
                             Edit Profile
                         </button>
-                        <div>
+                        {/* <div>
                         <input type="file" name="file" id="file" className="inputfile" />
                         <label for="file">Update Picture</label>
-                        </div>
+                        </div> */}
                         
                     </div>
                 </div>
