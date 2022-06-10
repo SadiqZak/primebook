@@ -6,21 +6,21 @@ Social Media App
 
 ## Available feats
 
-*Create a Post
-**Like
-**Comment & Replies
-*Edit & Delete Post
-**User Feed
-**Sort by Date, Trending & Recent
-*User Profile
-**Add Profile Picture
-**Add Background Image → P1
-**Bio
-**Portfolio URL
-*Follow/Unfollow
-*Explore Feed
-*Bookmark Post
-*Authentication
-**Login
+* Create a Post
+** Like
+** Comment & Replies
+* Edit & Delete Post
+** User Feed
+** Sort by Date, Trending & Recent
+* User Profile
+** Add Profile Picture
+** Add Background Image → P1
+** Bio
+** Portfolio URL
+* Follow/Unfollow
+* Explore Feed
+* Bookmark Post
+* Authentication
+** Login
 
 WATCH THIS SPACE FOR MORE!!
