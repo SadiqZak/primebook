@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CommentsTab } from "./component/CommentsTab";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
-import { updateCurrUser } from "../../../store/userSlice";
+import { bookmarkPost, removeBookmark, updateCurrUser } from "../../../store/userSlice";
 // import { getUserPosts, getUserProfiles } from "../../../store/profileSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -23,6 +23,7 @@ export const TextCard = ({
   const [editPostClick, setEditPostClick]= useState(false)
   const [more, setMore] = useState(false)
   const [textContent, setTextContent] = useState({content:content})
+  const [bookmarked, setBookMarked] = useState(false)
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
   const {userProfile} = useSelector((store)=>store.profile)
@@ -43,6 +44,16 @@ export const TextCard = ({
   const editPostHandler = ()=>{
     setEditPostClick((prev)=>!prev)
     dispatch(editPost({postId:postId, postData: textContent, encodedToken:token }))
+  }
+
+  const bookMarkHandler = ()=>{
+    setBookMarked((prev)=>!prev)
+    dispatch(bookmarkPost({postId, encodedToken:token}))
+  }
+
+  const removeBookMarkHandler = ()=>{
+    setBookMarked((prev)=>!prev)
+    dispatch(removeBookmark({postId, encodedToken:token}))
   }
 
   return (
@@ -133,9 +144,17 @@ export const TextCard = ({
                 postId={postId}
               />
             )}
-            <span className="material-icons post-footer-icons">
+            {
+              bookmarked && <span onClick={removeBookMarkHandler} className="material-icons post-footer-icons">
+              bookmark
+            </span>
+            }
+            {
+              !bookmarked && <span onClick={bookMarkHandler}  className="material-icons post-footer-icons">
               bookmark_border
             </span>
+            }
+            
           </div>
         </div>
         <div>
