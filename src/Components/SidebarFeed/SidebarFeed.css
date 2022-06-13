@@ -55,6 +55,11 @@
     color: var(--black-color);
 }
 
+.sidebarfeed-button.selected{
+    background-color: var(--white-color);
+    color: var(--black-color);
+}
+
 .sidebarfeed-user{
     display: flex;
     align-items: center;

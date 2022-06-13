@@ -12,13 +12,13 @@ export const posts = [
     content:
       "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
     likes: {
-      likeCount: 99,
+      likeCount: 98,
       likedBy: [],
       dislikedBy: [],
     },
     comments:[],
     username: "mrnags",
-    createdAt: "2022-06-06T13:34:40",
+    createdAt: "2022-05-08T13:34:40",
     updatedAt: formatDate(),
   },
   {
@@ -26,7 +26,7 @@ export const posts = [
     content:
       "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
     likes: {
-      likeCount: 0,
+      likeCount: 1,
       likedBy: [],
       dislikedBy: [],
     },
@@ -40,13 +40,27 @@ export const posts = [
     content:
       "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
     likes: {
-      likeCount: 1,
+      likeCount: 2,
       likedBy: [],
       dislikedBy: [],
     },
     comments:[],
     username: "karthik",
-    createdAt: "2022-06-06T13:38:40",
+    createdAt: "2022-06-01T13:38:40",
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
+    content:
+      "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
+    likes: {
+      likeCount: 99,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments:[],
+    username: "superCoder",
+    createdAt: "2022-06-02T13:34:40",
     updatedAt: formatDate(),
   },
 ];

@@ -7,7 +7,7 @@ import { filterData } from "../../backend/utils/filter";
 
 export const Home = () => {
 
-  const posts= useSelector((store)=>store.timeline.posts)
+  const {posts, sortSelectState}= useSelector((store)=>store.timeline)
   const dispatch = useDispatch()
   
 
@@ -16,8 +16,7 @@ export const Home = () => {
   },[])
 
 let newPosts = [...posts]
-const feedData = filterData(newPosts, "Latest")
-
+const feedData = filterData(newPosts, sortSelectState)
 
   return (
     <div className="middle-container">
