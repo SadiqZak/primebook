@@ -17,9 +17,9 @@ export const Home = () => {
   let currFollowingList = currFollowing[0]?.following.map((user)=>user.username)
   let finalList =[]
   if(currFollowingList){
-    finalList = [...currFollowingList, user.username]
+    finalList = [...currFollowingList, user?.username]
   }else{
-    finalList = [user.username]
+    finalList = [user?.username]
   } 
 
   console.log(users)
