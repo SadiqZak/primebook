@@ -5,7 +5,7 @@ import { authoriseUser } from "../../store/authSlice";
 import "./Login.css"
 
 const Login = () => {
-  const [userLog, setUserLog] = useState({username:"", password:""})
+  const [userLog, setUserLog] = useState({username:"adarshbalika", password:"adarshBalika123"})
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
