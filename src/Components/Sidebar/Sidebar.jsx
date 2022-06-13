@@ -1,10 +1,15 @@
 import SidebarChild from "./SidebarChild/SidebarChild";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProfiles } from "../../store/profileSlice";
 
 const Sidebar = () => {
   const [sidebarState, setSidebarState] = useState("Home")
+  const {token} = useSelector((store)=>store.authenticate)
+  const {userProfile} = useSelector((store)=>store.profile)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     setSidebarState("Home")

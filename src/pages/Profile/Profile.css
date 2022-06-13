@@ -1,0 +1,133 @@
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--sidebar-child-background);
+    border-radius: 5px;
+    box-shadow:1px 1px 1px 1px rgba(0,0,0,0.15);
+    background-color: var(--white-color);
+    position: relative;
+}
+
+.ht-100{
+    height: 100px;
+}
+
+.wd-100{
+    width: 100px;
+}
+
+.profile-cta-btn{
+    cursor: pointer;
+    background-color: var(--background-color);
+    border: 1px solid var(--sidebar-child-background);
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1.05rem;
+}
+
+.profile-avatar{
+    margin-left: 1rem;
+    background-color: var(--grey-color);
+    position: absolute;
+    top: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-content{
+    width: 70%;
+    margin-left: 8rem;
+    display: flex;
+    flex-direction: column;
+}
+.profile-header{
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-header-right{
+    display: flex;
+    gap: 0.3rem;
+}
+
+.profile-header-left{
+    display: flex;
+    gap: 0.3rem;
+}
+
+.profile-username-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-body{
+    padding: 0 1rem;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}
+
+.profile-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-info-child{
+    display: flex;
+    align-content: center;
+    gap: 0.1rem;
+}
+.profile-footer{
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.cover-photo{
+    width: 100%;
+    min-height: 10rem;
+    background-color: var(--primary-color);
+}
+
+.profile-bio{
+    width: 80%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    color: var(--black-color);
+    background-color: var(--background-color);
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}

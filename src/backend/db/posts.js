@@ -63,6 +63,20 @@ export const posts = [
     createdAt: "2022-06-02T13:34:40",
     updatedAt: formatDate(),
   },
+  {
+    _id: uuid(),
+    content:
+      "At vero eos et accusamus alias consequatur aut perferendis doloribus asperiores repellat.",
+    likes: {
+      likeCount: 99,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    comments:[],
+    username: "adarshbalika",
+    createdAt: "2022-06-02T13:34:40",
+    updatedAt: formatDate(),
+  },
 ];
 
 
