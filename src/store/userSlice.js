@@ -1,29 +1,61 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { getAllUserService } from "../services/userService";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getAllUserService, followUserServices } from "../services/userService";
 
-export const getAllUsers = createAsyncThunk(`profile/getUsers`, async()=>{
-    try{
-        const response = await getAllUserService()
-        return response.data.users;
-    }catch(err){
-        console.log(err)
+export const getAllUsers = createAsyncThunk(`profile/getUsers`, async () => {
+  try {
+    const response = await getAllUserService();
+    return response.data.users;
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+export const followUser = createAsyncThunk(
+  "users/followUser",
+  async ({ followUserId, encodedToken }) => {
+    try {
+      const response = await followUserServices({followUserId, encodedToken});
+      return response.data;
+    } catch (err) {
+      console.error(err);
     }
-})
+  }
+);
 
 export const userSlice = createSlice({
-    name:"users",
-    initialState:{
-        users:[]
+  name: "users",
+  initialState: {
+    users: [],
+    currentUser: "",
+  },
+  reducers: {
+    updateCurrUser: (state, action) => {
+      state.currentUser = action.payload;
     },
-    reducers:{},
-    extraReducers:{
-        [getAllUsers.fulfilled]:(state, action)=>{
-            state.users = action.payload
-        },
-        [getAllUsers.rejected]:(action)=>{
-            console.log(action.payload)
-        }
-    }
-})
+  },
+  extraReducers: {
+    [getAllUsers.fulfilled]: (state, action) => {
+      state.users = action.payload;
+    },
+    [getAllUsers.rejected]: (action) => {
+      console.log(action.payload);
+    },
+    [followUser.fulfilled]: (state, action) => {
+      state.users = [...state.users].map((user) =>
+        action.payload.followUser.username === user.username
+          ? action.payload.followUser
+          : user
+      );
+      state.users = [...state.users].map((user) =>
+        action.payload.user.username === user.username ? action.payload.user : user,
+      );
 
-export default userSlice.reducer
+    },
+    [followUser.rejected]: (action) => {
+      console.error(action);
+    },
+  },
+});
+
+export default userSlice.reducer;
+export const { updateCurrUser } = userSlice.actions;

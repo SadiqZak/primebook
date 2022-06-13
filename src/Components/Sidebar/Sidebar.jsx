@@ -24,7 +24,7 @@ const Sidebar = () => {
           <SidebarChild path={"/explore"} icon={"explore"} comp={"Explore"} sidebarState={sidebarState} setSidebarState={setSidebarState}/>
           <SidebarChild path={"/favorite"} icon={"favorite"} comp={"Liked Posts"}sidebarState={sidebarState} setSidebarState={setSidebarState} />
           <SidebarChild path={"/bookmark"} icon={"bookmark"} comp={"Bookmarks"} sidebarState={sidebarState} setSidebarState={setSidebarState}/>
-          <SidebarChild path={"/profile"} icon={"person"} comp={"Profile"} sidebarState={sidebarState} setSidebarState={setSidebarState}/>
+          {/* <SidebarChild path={"/profile"} icon={"person"} comp={"Profile"} sidebarState={sidebarState} setSidebarState={setSidebarState}/> */}
           <button className="cta-btn sidebar-btn">Post</button>
         </div>
       </div>

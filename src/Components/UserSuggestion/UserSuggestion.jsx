@@ -1,18 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import { followUser, updateCurrUser } from "../../store/userSlice";
+import './UserSuggestion.css'
 
-export const UserSuggestion = ({username, usertag}) => {
+export const UserSuggestion = ({username, usertag, userId}) => {
+  const dispatch = useDispatch()
+  const {token} = useSelector((store)=>store.authenticate)
   return (
-    <div>
+    
+      <div>
       <div className="sidebarfeed-user">
-        <div className="avatar-round wd-50 ht-50"></div>
-        <div className="username-tag">
-          <small>{username}</small>
-          <small>{usertag}</small>
-        </div>
+        <Link onClick={()=>dispatch(updateCurrUser(username))} className="feedbar-link-tag" to="/profile">
+          <div className="avatar-round wd-50 ht-50"></div>
+          <div className="username-tag">
+            <small>{username}</small>
+            <small>{usertag}</small>
+          </div>
+        </Link>
         <div>
-          <button className="sidebarfeed-button-secondary">Follow</button>
+          <button onClick={()=> dispatch(followUser({followUserId: userId, encodedToken: token}))} className="sidebarfeed-button-secondary">Follow</button>
         </div>
       </div>
     </div>
+    
   );
 };

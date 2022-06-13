@@ -63,6 +63,7 @@
 .sidebarfeed-user{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.5rem;
     cursor: pointer;
     padding: 0.2rem;

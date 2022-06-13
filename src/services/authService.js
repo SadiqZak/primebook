@@ -5,3 +5,14 @@ export const loginService = async ({username, password}) =>{
         username, password
     })
 } 
+
+export const editUserServices = ({userData, encodedToken})=>{
+    return axios.post(
+        '/api/users/edit',
+        { userData },
+        {
+          headers: {
+            authorization:encodedToken,
+          },
+        },)
+}
