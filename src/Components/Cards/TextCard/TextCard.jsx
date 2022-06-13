@@ -74,7 +74,7 @@ export const TextCard = ({
             </div>
           </div>
           {
-            user.username === username &&
+            user?.username === username &&
             <div>
             <span onClick = {()=> setMore((prev)=>!prev)} className="material-icons edit-delete-icon">more_vert</span>
             {
@@ -92,7 +92,7 @@ export const TextCard = ({
         
         </div>
         <div className="post-content">
-          {user.username===username &&
+          {user?.username===username &&
             <div>
               {
             editPostClick && 
@@ -106,7 +106,7 @@ export const TextCard = ({
           }
             </div>
           }
-          {user.username!==username &&
+          {user?.username!==username &&
             <span>{content}</span>
           }
           

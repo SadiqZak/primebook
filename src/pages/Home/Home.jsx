@@ -15,6 +15,7 @@ export const Home = () => {
   
   const currFollowing = users?.filter((feeduser)=>feeduser.username===user?.username)
   let currFollowingList = currFollowing[0]?.following.map((user)=>user?.username)
+
   let finalList =[]
   if(currFollowingList){
     finalList = [...currFollowingList, user?.username]
