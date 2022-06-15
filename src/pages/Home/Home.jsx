@@ -5,12 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../store/postSlice";
 import { filterData } from "../../backend/utils/filter";
 import { SidebarFeed } from '../../Components/SidebarFeed/SidebarFeed';
+import Header from "../../Components/Header/Header";
+import Sidebar from "../../Components/Sidebar/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const {user} = useSelector((store)=>store.authenticate)
   const {users} = useSelector((store)=>store.users)
-  // const [displayList, setDisplayList] = useState([user.username])
   const {posts, sortSelectState}= useSelector((store)=>store.timeline)
+  const [sidebarState, setSidebarState] = useState("Home")
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   
   const currFollowing = users?.filter((feeduser)=>feeduser.username===user?.username)
@@ -25,12 +29,17 @@ export const Home = () => {
 
   useEffect(()=>{
     dispatch(getAllPosts())
+    navigate("/")
   },[])
 
 let newPosts = [...posts]
 const feedData = filterData(newPosts, sortSelectState)
 
   return (
+    <div className="App">
+    <Header/>
+    <div className='App-body'>
+    <Sidebar sidebarState={sidebarState} setSidebarState={setSidebarState}/>
     <div className="flex">
        <div className="middle-container">
           <div className="middle-child">
@@ -45,6 +54,9 @@ const feedData = filterData(newPosts, sortSelectState)
       </div>
       <SidebarFeed/>
     </div>
+    </div>
+    </div>
+   
    
   );
 };

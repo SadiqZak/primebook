@@ -5,7 +5,7 @@ export const authoriseUser = createAsyncThunk("authorisation/authoriseUser",asyn
     try{
         const response = await loginService({username, password})
     if(response.status === 200){
-        console.log(response.data)
+        // console.log(response.data)
         return response.data
     }
     }catch(err){
@@ -32,7 +32,13 @@ const authSlice = createSlice({
         user:JSON.parse(localStorage.getItem('login'))?.user,
         isAuthenticated:false
     },
-    reducer:{},
+    reducers:{
+        logoutUser: (state) => {
+            localStorage.removeItem('login');
+            state.token = null;
+            state.user = null;
+          },
+    },
     extraReducers:{
         [authoriseUser.fulfilled]:(state, action)=>{
             state.token=action.payload.encodedToken;
@@ -57,4 +63,5 @@ const authSlice = createSlice({
     }
 })
 
-export default authSlice.reducer
+export default authSlice.reducer;
+export const {logoutUser} = authSlice.actions;

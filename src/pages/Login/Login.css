@@ -1,15 +1,20 @@
+.login-right{
+    display: flex;
+    justify-content: center;
+    flex-grow: 0.5;
+}
+
 .login-wrapper{
-    margin: 0 auto;
     min-height: 300px;
     height: max-content;
-    width:350px;
+    width:400px;
     background-color: var(--white-color);
     color: var(--menu-bar);
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
-    box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.2);
+    border: 1px solid black;
     padding: 1rem;
 }
 
@@ -29,3 +34,21 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.login-container {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.login-cover{
+    display: flex; 
+    flex-grow: 0.5;
+    background-color: var(--primary-color);
+}
+
+.login-right{
+    margin: auto;
+}
+
