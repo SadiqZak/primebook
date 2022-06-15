@@ -5,6 +5,8 @@ import { TextCard } from '../../Components/Cards/TextCard/TextCard'
 import { getUserPosts, getUserProfile } from '../../store/profileSlice'
 import { ProfileChild } from './Component/ProfileChild'
 import "./Profile.css"
+import Header from '../../Components/Header/Header'
+import Sidebar from '../../Components/Sidebar/Sidebar'
 
 export const Profile = () => {
     const {userPosts, userProfile} = useSelector((store)=>store.profile)
@@ -19,6 +21,10 @@ export const Profile = () => {
     }, [])
 
   return (
+    <div className="App">
+    <Header/>
+    <div className='App-body'>
+      <Sidebar/>
     <div className='middle-container'>
         <div className='middle-child'>
           <ProfileChild userProfile={userProfile}/>
@@ -29,6 +35,8 @@ export const Profile = () => {
            <TextCard key={post._id} firstName={post.firstName} lastName={post.lastName} likes={post.likes} postId={post._id} comments={post.comments} username={post.username} content={post.content} date={post.createdAt}/>
         ))}
         </div>
+    </div>
+    </div>
     </div>
   )
 }
