@@ -47,6 +47,7 @@ export const likePost = createAsyncThunk('posts/likePost', async({postId, encode
     try{
         const response = await likePostService({postId, encodedToken})
         if(response.status === 201){ //201 is a create status code //HTTP status code 
+            // console.log(response.data.posts)
             return response.data.posts
         }
     }catch(err){
@@ -120,7 +121,7 @@ const postsSlice = createSlice({
             console.error(action.payload)
         },
         [likePost.fulfilled]:(state, action)=>{
-            console.log(action.payload)
+            // console.log(action.payload)
             state.posts = action.payload
         },
         [likePost.rejected]:(action)=>{

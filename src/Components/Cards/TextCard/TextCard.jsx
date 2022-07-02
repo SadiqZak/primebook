@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { CommentsTab } from "./component/CommentsTab";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
-import { bookmarkPost, removeBookmark, updateCurrUser } from "../../../store/userSlice";
-// import { getUserPosts, getUserProfiles } from "../../../store/profileSlice";
+import { updateCurrUser } from "../../../store/userSlice";
+import { bookmarkPost, removeBookmark } from "../../../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export const TextCard = ({
@@ -19,16 +19,16 @@ export const TextCard = ({
   userId
 }) => {
   const [clicked, setClicked] = useState(false);
-  const [liked, setLiked] = useState(false);
   const [editPostClick, setEditPostClick]= useState(false)
+  const [liked, setLiked] = useState(likes.likedBy.length !==0);
   const [more, setMore] = useState(false)
   const [textContent, setTextContent] = useState({content:content})
-  const [bookmarked, setBookMarked] = useState(false)
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
   const {userProfile} = useSelector((store)=>store.profile)
   const navigate= useNavigate()
 
+  const [bookmarked, setBookMarked] = useState(()=>{return user ? user.bookmarks.filter((bookmark)=>bookmark._id===postId).length !==0: false})
 
   const likedHandler =()=>{
     if(liked){
@@ -47,13 +47,14 @@ export const TextCard = ({
   }
 
   const bookMarkHandler = ()=>{
-    setBookMarked((prev)=>!prev)
-    dispatch(bookmarkPost({postId, encodedToken:token}))
+      dispatch(bookmarkPost({postId, encodedToken:token}))
+      setBookMarked((prev)=>!prev)
   }
 
   const removeBookMarkHandler = ()=>{
-    setBookMarked((prev)=>!prev)
+    console.log("called")
     dispatch(removeBookmark({postId, encodedToken:token}))
+    setBookMarked((prev)=>!prev)
   }
 
   return (

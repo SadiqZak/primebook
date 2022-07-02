@@ -7,7 +7,7 @@ import Header from '../../Components/Header/Header'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 
 export const Bookmarks = () => {
-  const {currUserBookmark} = useSelector((store)=>store.users)
+  const {user} = useSelector((store)=>store.authenticate)
   const [sidebarState, setSidebarState] = useState("Bookmarks")
   const navigate = useNavigate()
   // const dispatch= useDispatch()
@@ -15,6 +15,7 @@ export const Bookmarks = () => {
   useEffect(()=>{
     navigate("/bookmark")
   },[])
+
 
   return (
     <div className="App">
@@ -25,7 +26,7 @@ export const Bookmarks = () => {
       <div className="middle-child">
         <div className="middle-child-wrapper">
           {
-            currUserBookmark[0]?.bookmarks.map((post)=>(
+            user.bookmarks.map((post)=>(
               <TextCard
             key={post._id}
             firstName={post.firstName}
