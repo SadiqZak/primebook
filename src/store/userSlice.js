@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllUserService, followUserServices, bookMarkService, removeBookMarkService } from "../services/userService";
+import { getAllUserService, followUserServices, bookMarkService, removeBookMarkService, unfollowUserServices } from "../services/userService";
 
 export const getAllUsers = createAsyncThunk(`profile/getUsers`, async () => {
   try {
@@ -15,6 +15,7 @@ export const followUser = createAsyncThunk(
   async ({ followUserId, encodedToken }) => {
     try {
       const response = await followUserServices({followUserId, encodedToken});
+      console.log(response.data)
       return response.data;
     } catch (err) {
       console.error(err);
@@ -22,6 +23,19 @@ export const followUser = createAsyncThunk(
   }
 );
 
+export const unfollowUser = createAsyncThunk(
+  "users/unfollowUser",
+  async ({followUserId, encodedToken}) =>{
+    try{
+      const response = await unfollowUserServices({followUserId, encodedToken})
+      console.log(response.data)
+      return response.data
+    }catch(err){
+      console.error(err)
+    }
+  }
+
+)
 export const userSlice = createSlice({
   name: "users",
   initialState: {
@@ -54,7 +68,18 @@ export const userSlice = createSlice({
     [followUser.rejected]: (action) => {
       console.error(action);
     },
-
+    [unfollowUser.fulfilled]: (state,action)=>{
+      state.users = state.users.map((user) =>
+        action.payload.followUser.username === user.username ? action.payload.followUser : user,
+      );
+      state.users = [...state.users].map((user) =>
+        action.payload.user.username === user.username ? action.payload.user : user,
+      );
+     
+    },
+    [unfollowUser.rejected]: (action)=>{
+      console.error(action.payload)
+    }
   },
 });
 

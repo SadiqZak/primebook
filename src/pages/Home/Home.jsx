@@ -14,26 +14,22 @@ export const Home = () => {
   const {users} = useSelector((store)=>store.users)
   const {posts, sortSelectState}= useSelector((store)=>store.timeline)
   const [sidebarState, setSidebarState] = useState("Home")
+  let [listUser, setListUser] = useState([])
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  
-  const currFollowing = users?.filter((feeduser)=>feeduser.username===user?.username)
-  let currFollowingList = currFollowing[0]?.following.map((user)=>user?.username)
-
-  let finalList =[]
-  if(currFollowingList){
-    finalList = [...currFollowingList, user?.username]
-  }else{
-    finalList = [user?.username]
-  } 
-
   useEffect(()=>{
-    dispatch(getAllPosts())
     navigate("/")
+    dispatch(getAllPosts())
   },[])
+  
+  const findUser = (arr)=>{
+    return arr.length!==0?  arr.find((userCheck)=>userCheck.username === user.username).following : []
+  }
 
-let newPosts = [...posts]
-const feedData = filterData(newPosts, sortSelectState)
+  let finalList = [...findUser(users), user]
+
+  let newPosts = [...posts]
+  const feedData = filterData(newPosts, sortSelectState)
 
   return (
     <div className="App">
@@ -45,10 +41,13 @@ const feedData = filterData(newPosts, sortSelectState)
           <div className="middle-child">
             <FeedWall />
             {feedData?.map((post)=>(
-                  finalList.map((user)=>(
-                    post.username === user &&
+              finalList.map((listItem)=>(
+                <>
+                  { listItem.username === post.username &&
                     <TextCard key={post._id} firstName={post.firstName} lastName={post.lastName} likes={post.likes} postId={post._id} comments={post.comments} username={post.username} content={post.content} date={post.createdAt}/>
-                  ))
+                  }
+                </>
+                              ))  
             ))}
           </div>
       </div>

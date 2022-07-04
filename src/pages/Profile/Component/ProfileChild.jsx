@@ -1,11 +1,31 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { unfollowUser, followUser } from '../../../store/userSlice'
 import '../Profile.css'
 
-export const ProfileChild = ({userProfile}) => {
+export const ProfileChild = ({userProfile, currentUser}) => {
    const [imageFile, setImageFile] = useState([])
-   const {user} = useSelector((store)=>store.authenticate)
+   const {user, token} = useSelector((store)=>store.authenticate)
+   const {users} = useSelector((store)=>store.users)
+   const dispatch = useDispatch()
+   
+   const findUser = (arr)=>{
+    return arr.length!==0?  arr.find((userCheck)=>userCheck.username === user.username).following : []
+  }
+
+  const checkUser = (arr)=>{
+    return arr.some((checkUserItem)=>checkUserItem.username===userProfile.username)
+  }
+
+  const unfollowHandler = ()=>{
+    dispatch(unfollowUser({followUserId: userProfile._id, encodedToken: token}))
+   }
+
+   const followHandler = ()=>{
+    dispatch(followUser({followUserId: userProfile._id, encodedToken: token}))
+   }
   
   return (
     <div>
@@ -44,9 +64,19 @@ export const ProfileChild = ({userProfile}) => {
                     <span>5 Following</span>
                     {
                         userProfile.username !== user.username &&
-                    <button className='profile-cta-btn'>
-                        unfollow
-                    </button>
+                        <>
+                        {checkUser(findUser(users)) &&
+                             <button onClick={unfollowHandler} className='profile-cta-btn'>
+                             unfollow
+                            </button>
+                        }
+                        {!checkUser(findUser(users)) &&
+                             <button onClick={followHandler} className='profile-cta-btn'>
+                             follow
+                            </button>
+                        }
+                        </>
+                   
                     }
                    
                 </div>

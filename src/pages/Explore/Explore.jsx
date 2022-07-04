@@ -20,7 +20,7 @@ export const Explore = () => {
   useEffect(()=>{
     dispatch(getAllPosts())
     navigate("/explore")
-  },[])
+  },[dispatch])
 
   return (
     <div className="App">
