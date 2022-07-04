@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
 import { updateCurrUser } from "../../../store/userSlice";
 import { bookmarkPost, removeBookmark } from "../../../store/authSlice";
-import { useNavigate } from "react-router-dom";
 
 export const TextCard = ({
   hasImage,
@@ -20,25 +19,20 @@ export const TextCard = ({
 }) => {
   const [clicked, setClicked] = useState(false);
   const [editPostClick, setEditPostClick]= useState(false)
-  const [liked, setLiked] = useState(likes.likedBy.length !==0);
   const [more, setMore] = useState(false)
   const [textContent, setTextContent] = useState({content:content})
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
-  const {userProfile} = useSelector((store)=>store.profile)
-  const navigate= useNavigate()
 
-  const [bookmarked, setBookMarked] = useState(()=>{return user ? user.bookmarks.filter((bookmark)=>bookmark._id===postId).length !==0: false})
-
+  const userLiked = ()=> likes.likedBy.filter((likedUser)=>likedUser.username === user.username).length!=0
+  const userBookmarked =()=>user.bookmarks.filter((bookmarkId)=>bookmarkId === postId).length!=0
+ 
   const likedHandler =()=>{
-    if(liked){
+    if(userLiked() ){
       dispatch(dislikePost({postId: postId, encodedToken: token}))
-      setLiked((prev)=>!prev)
     }else{
       dispatch(likePost({postId: postId, encodedToken: token}))
-      setLiked((prev)=>!prev)
     }
-    
   }
 
   const editPostHandler = ()=>{
@@ -47,14 +41,11 @@ export const TextCard = ({
   }
 
   const bookMarkHandler = ()=>{
+    if(userBookmarked()){
+      dispatch(removeBookmark({postId:postId, encodedToken:token}))
+    }else{
       dispatch(bookmarkPost({postId:postId, encodedToken:token}))
-      setBookMarked((prev)=>!prev)
-  }
-
-  const removeBookMarkHandler = ()=>{
-    // console.log("called")
-    dispatch(removeBookmark({postId:postId, encodedToken:token}))
-    setBookMarked((prev)=>!prev)
+    }
   }
 
   return (
@@ -118,13 +109,13 @@ export const TextCard = ({
         <div className="post-footer">
           <div className="post-footer-child-left">
             {
-              !liked && <span onClick={likedHandler} className="material-icons post-footer-icons">
+              !userLiked()&& <span onClick={likedHandler} className="material-icons post-footer-icons">
               favorite_border
             </span>
             
             }
             {
-              liked && <span onClick={likedHandler} className="material-icons post-footer-icons">
+              userLiked()&& <span onClick={likedHandler} className="material-icons post-footer-icons">
               favorite
             </span>
             }
@@ -146,12 +137,12 @@ export const TextCard = ({
               />
             )}
             {
-              bookmarked && <span onClick={removeBookMarkHandler} className="material-icons post-footer-icons">
+              userBookmarked() && <span onClick={bookMarkHandler} className="material-icons post-footer-icons">
               bookmark
             </span>
             }
             {
-              !bookmarked && <span onClick={bookMarkHandler}  className="material-icons post-footer-icons">
+              !userBookmarked() && <span onClick={bookMarkHandler}  className="material-icons post-footer-icons">
               bookmark_border
             </span>
             }

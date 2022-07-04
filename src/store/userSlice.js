@@ -15,7 +15,6 @@ export const followUser = createAsyncThunk(
   async ({ followUserId, encodedToken }) => {
     try {
       const response = await followUserServices({followUserId, encodedToken});
-      console.log(response.data)
       return response.data;
     } catch (err) {
       console.error(err);
@@ -28,7 +27,6 @@ export const unfollowUser = createAsyncThunk(
   async ({followUserId, encodedToken}) =>{
     try{
       const response = await unfollowUserServices({followUserId, encodedToken})
-      console.log(response.data)
       return response.data
     }catch(err){
       console.error(err)
@@ -52,7 +50,7 @@ export const userSlice = createSlice({
       state.users = action.payload;
     },
     [getAllUsers.rejected]: (action) => {
-      console.log(action.payload);
+      console.error(action.payload);
     },
     [followUser.fulfilled]: (state, action) => {
       state.users = [...state.users].map((user) =>

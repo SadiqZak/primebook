@@ -29,7 +29,6 @@ export const getCommentsService = async({postId, encodedToken})=>{
 }
 
 export const likePostService = async({postId, encodedToken})=>{
-    // console.log(postId, encodedToken)
     return axios.post(`/api/posts/like/${postId}`,{}, {
         headers:{
             authorization: encodedToken,

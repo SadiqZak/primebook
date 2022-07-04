@@ -8,13 +8,16 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 
 export const Bookmarks = () => {
   const {user} = useSelector((store)=>store.authenticate)
+  const {posts} = useSelector((store)=>store.timeline)
   const [sidebarState, setSidebarState] = useState("Bookmarks")
   const navigate = useNavigate()
-  // const dispatch= useDispatch()
 
   useEffect(()=>{
     navigate("/bookmark")
   },[])
+
+  let newPosts = [...posts]
+  const getBookmarkedPosts = (postId) => newPosts.filter((newPostId)=> newPostId._id === postId)
 
 
   return (
@@ -26,8 +29,9 @@ export const Bookmarks = () => {
       <div className="middle-child">
         <div className="middle-child-wrapper">
           {
-            user.bookmarks.map((post)=>(
-              <TextCard
+            user.bookmarks.map((postId)=>(
+              getBookmarkedPosts(postId).map((post)=>(
+                <TextCard
                 key={post._id}
                 firstName={post.firstName}
                 lastName={post.lastName}
@@ -38,6 +42,8 @@ export const Bookmarks = () => {
                 content={post.content}
                 date={post.createdAt}
           />
+              ))
+             
             ))
           }
        

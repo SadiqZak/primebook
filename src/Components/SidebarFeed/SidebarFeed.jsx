@@ -34,14 +34,8 @@ export const SidebarFeed = () => {
         </div>
         {feedData.map((feedDataUser)=>(
           user?.username !== feedDataUser.username &&
-          <>
-             {
             feedDataUser.followers[0]?.username !== user?.username &&
             <UserSuggestion key={feedDataUser._id} userId={feedDataUser._id} username={feedDataUser.username} usertag={`@${feedDataUser.username}`}/>
-            }
-          </>
-         
-          
         ))}
         
       </div>

@@ -31,13 +31,13 @@ export const profileSlice = createSlice({
             state.userPosts=action.payload
         },
         [getUserPosts.rejected]:(action)=>{
-            console.log(action.payload)
+            console.error(action.payload)
         },
         [getUserProfile.fulfilled]:(state, action)=>{
             state.userProfile =action.payload
         },
         [getUserProfile.rejected]:( action)=>{ 
-            console.log(action.payload)
+            console.error(action.payload)
         },
     }
 })

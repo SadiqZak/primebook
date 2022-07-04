@@ -26,7 +26,7 @@ export const editUserProfile = createAsyncThunk(
     }
   );
 
-  export const bookmarkPost = createAsyncThunk('posts/bookmarkPost', async({postId, encodedToken})=>{
+  export const bookmarkPost = createAsyncThunk('authorisation/bookmarkPost', async({postId, encodedToken})=>{
     try{
         const response = await bookMarkService({postId, encodedToken})
         return response.data.bookmarks
@@ -35,7 +35,7 @@ export const editUserProfile = createAsyncThunk(
     }
   })
 
-  export const removeBookmark = createAsyncThunk('posts/removeBookmark', async({postId, encodedToken})=>{
+  export const removeBookmark = createAsyncThunk('authorisation/removeBookmark', async({postId, encodedToken})=>{
     try{
       const response = await removeBookMarkService({postId, encodedToken})
       return response.data.bookmarks
@@ -84,13 +84,13 @@ const authSlice = createSlice({
             state.user.bookmarks = action.payload
         },
         [bookmarkPost.rejected]:(action)=>{
-            console.log(action.payload)
+            console.error(action.payload)
         },
         [removeBookmark.fulfilled]:(state, action)=>{
             state.user.bookmarks = action.payload
         },
         [removeBookmark.rejected]:(action)=>{
-          console.log(action.payload)
+          console.error(action.payload)
         }
     }
 })

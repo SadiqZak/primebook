@@ -126,14 +126,12 @@ const postsSlice = createSlice({
             console.error(action.payload)
         },
         [dislikePost.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [dislikePost.rejected]: (action)=>{
             console.error(action.payload)
         },
         [editPost.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [editPost.rejected]:(action)=>{
