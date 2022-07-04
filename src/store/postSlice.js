@@ -26,7 +26,6 @@ export const addPostToFeed = createAsyncThunk("posts/addPostToFeed", async({post
 export const addComment = createAsyncThunk("posts/addComment", async({postId, commentData, encodedToken})=>{
     try{
         const response = await addCommentService({postId, commentData, encodedToken})
-        console.log(response)
             return response.data.posts
     }catch(err){
          console.error(err)   
@@ -64,7 +63,7 @@ export const dislikePost = createAsyncThunk('posts/dislikePost', async({postId, 
     }
 })
 
-export const editPost = createAsyncThunk('posts/editPost',async({postData, postId, encodedToken})=>{
+export const editPost = createAsyncThunk('posts/editPost',async({postId, postData, encodedToken})=>{
     try{
         const response = await editPostService({postId, postData, encodedToken})
         return response.data.posts

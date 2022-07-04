@@ -7,23 +7,23 @@ import { dislikePost, likePost, editPost, deletePost} from "../../../store/postS
 import { updateCurrUser } from "../../../store/userSlice";
 import { bookmarkPost, removeBookmark } from "../../../store/authSlice";
 
-export const TextCard = ({
-  hasImage,
-  username,
-  content,
-  date,
-  postId,
-  comments,
-  likes,
-  userId
-}) => {
+export const TextCard = (post) => {
+ let  {
+    hasImage,
+    username,
+    content,
+    date,
+    postId,
+    comments,
+    likes,
+  } = post
   const [clicked, setClicked] = useState(false);
   const [editPostClick, setEditPostClick]= useState(false)
   const [more, setMore] = useState(false)
   const [textContent, setTextContent] = useState({content:content})
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
-
+  
   const userLiked = ()=> likes.likedBy.filter((likedUser)=>likedUser.username === user.username).length!=0
   const userBookmarked =()=>user.bookmarks.filter((bookmarkId)=>bookmarkId === postId).length!=0
  
@@ -37,7 +37,7 @@ export const TextCard = ({
 
   const editPostHandler = ()=>{
     setEditPostClick((prev)=>!prev)
-    dispatch(editPost({postId:postId, postData: textContent, encodedToken:token }))
+    dispatch(editPost({postId:postId, postData:textContent, encodedToken:token }))
   }
 
   const bookMarkHandler = ()=>{
