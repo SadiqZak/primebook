@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { unfollowUser, followUser } from '../../../store/userSlice'
 import '../Profile.css'
 
-export const ProfileChild = ({userProfile, currentUser}) => {
-   const [imageFile, setImageFile] = useState([])
+export const ProfileChild = ({userProfile}) => {
    const {user, token} = useSelector((store)=>store.authenticate)
    const {users} = useSelector((store)=>store.users)
    const dispatch = useDispatch()
@@ -26,6 +25,8 @@ export const ProfileChild = ({userProfile, currentUser}) => {
    const followHandler = ()=>{
     dispatch(followUser({followUserId: userProfile._id, encodedToken: token}))
    }
+
+  let avatar = users.find((userItem)=>userItem.username===userProfile.username)?.avatar
   
   return (
     <div>
@@ -33,7 +34,7 @@ export const ProfileChild = ({userProfile, currentUser}) => {
           <div className="profile-container">
                 <div className="cover-photo"></div>
                 <div className="avatar-round profile-avatar ht-100 wd-100">
-                    <img source="../../../Assets/profile.jpg"/>
+                    <img className="avatar-image" src={`${avatar}`}/>
                 </div>
                 <div className="profile-content">
                 <div className="profile-header">

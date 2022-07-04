@@ -21,6 +21,7 @@ export const TextCard = (post) => {
   const [editPostClick, setEditPostClick]= useState(false)
   const [more, setMore] = useState(false)
   const [textContent, setTextContent] = useState({content:content})
+  const {users, currentUser} = useSelector((store)=>store.users)
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
   
@@ -48,6 +49,9 @@ export const TextCard = (post) => {
     }
   }
 
+  let avatar = users.find((userItem)=>userItem.username===username)?.avatar
+  let mainAvatar = users.find((userItem)=>userItem.username===user.username)?.avatar
+
   return (
     <div>
       {" "}
@@ -55,7 +59,9 @@ export const TextCard = (post) => {
         <div className="text-post-header-wrap">
           <div className="post-header">
           <Link onClick={()=>dispatch(updateCurrUser(username))} className="feedbar-link-tag" to="/profile">
-            <div className="avatar-round wd-50 ht-50"></div>
+            <div className="avatar-round wd-50 ht-50">
+              <img className="avatar-image" src={`${avatar}`}/>
+            </div>
           </Link>
             <div className="username-tag-post">
               <small>{username}</small>
@@ -155,7 +161,9 @@ export const TextCard = (post) => {
               <div>
                 {comments[0]?.username && (
                   <div className="comment-tab">
-                    <div className="avatar-round ht-20 wd-20"></div>
+                    <div className="avatar-round ht-20 wd-20">
+                    <img className="avatar-image" src={`${mainAvatar}`}/>
+                    </div>
                     <div className="flex-column">
                       {comments[0]?.username}
                       <small> {`@${comments[0]?.username}`}</small>

@@ -10,7 +10,6 @@ export const SidebarFeed = () => {
   const {sortSelectState} = useSelector((store)=>store.timeline)
   const {user} = useSelector((store)=>store.authenticate)
   const {users} = useSelector((store)=>store.users)
-  const {userProfile} = useSelector((store)=>store.profile)
   const dispatch = useDispatch()
 
   useEffect(()=>{
