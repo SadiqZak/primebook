@@ -47,13 +47,13 @@ export const TextCard = ({
   }
 
   const bookMarkHandler = ()=>{
-      dispatch(bookmarkPost({postId, encodedToken:token}))
+      dispatch(bookmarkPost({postId:postId, encodedToken:token}))
       setBookMarked((prev)=>!prev)
   }
 
   const removeBookMarkHandler = ()=>{
-    console.log("called")
-    dispatch(removeBookmark({postId, encodedToken:token}))
+    // console.log("called")
+    dispatch(removeBookmark({postId:postId, encodedToken:token}))
     setBookMarked((prev)=>!prev)
   }
 

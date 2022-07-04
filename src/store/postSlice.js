@@ -108,7 +108,6 @@ const postsSlice = createSlice({
             console.error(action.payload)
         },
         [addComment.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [addComment.rejected]:(action)=>{
@@ -121,7 +120,6 @@ const postsSlice = createSlice({
             console.error(action.payload)
         },
         [likePost.fulfilled]:(state, action)=>{
-            // console.log(action.payload)
             state.posts = action.payload
         },
         [likePost.rejected]:(action)=>{

@@ -28,15 +28,15 @@ export const Bookmarks = () => {
           {
             user.bookmarks.map((post)=>(
               <TextCard
-            key={post._id}
-            firstName={post.firstName}
-            lastName={post.lastName}
-            likes={post.likes}
-            postId={post._id}
-            comments={post.comments}
-            username={post.username}
-            content={post.content}
-            date={post.createdAt}
+                key={post._id}
+                firstName={post.firstName}
+                lastName={post.lastName}
+                likes={post.likes}
+                postId={post._id}
+                comments={post.comments}
+                username={post.username}
+                content={post.content}
+                date={post.createdAt}
           />
             ))
           }
