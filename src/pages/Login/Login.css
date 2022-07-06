@@ -1,3 +1,10 @@
+.login-container {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
 .login-right{
     display: flex;
     justify-content: center;
@@ -18,6 +25,21 @@
     padding: 1rem;
 }
 
+@media screen and (max-width:600px){
+    
+    .login-right{
+       padding: 1rem;
+    }
+
+    .login-wrapper{
+        min-height: 200px;
+        height: max-content;
+        width:100%;
+    }
+
+
+    }
+
 .flex-dir-column-login{
     gap:0.5rem;
     display: flex;
@@ -33,13 +55,6 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-}
-
-.login-container {
-    min-height: 100vh;
-    height: 100%;
-    width: 100%;
-    display: flex;
 }
 
 .login-cover{
