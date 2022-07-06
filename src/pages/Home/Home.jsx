@@ -16,6 +16,7 @@ export const Home = () => {
   const [sidebarState, setSidebarState] = useState("Home");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   useEffect(() => {
     navigate("/");
     dispatch(getAllPosts());

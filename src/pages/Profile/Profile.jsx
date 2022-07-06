@@ -10,8 +10,7 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 
 export const Profile = () => {
     const {userPosts, userProfile} = useSelector((store)=>store.profile)
-    const {user} = useSelector((store)=>store.authenticate)
-    const {currentUser, users} = useSelector((store)=>store.users)
+    const {currentUser} = useSelector((store)=>store.users)
     const [sidebarState, setSidebarState] = useState("Profile")
     const feedData = [...userPosts]
     const dispatch =useDispatch()
@@ -19,7 +18,7 @@ export const Profile = () => {
     useEffect(()=>{
       dispatch(getUserPosts({username:`${currentUser}`}))
       dispatch(getUserProfile({username:`${currentUser}`}))
-    }, [dispatch])
+    }, [])
 
   return (
     <div className="App">

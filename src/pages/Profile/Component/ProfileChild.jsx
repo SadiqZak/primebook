@@ -2,12 +2,16 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { editUser } from "../../../store/profileSlice";
 import { unfollowUser, followUser } from "../../../store/userSlice";
 import "../Profile.css";
 
-export const ProfileChild = ({ userProfile }) => {
+export const ProfileChild = ({ userProfile , currentUser}) => {
   const { user, token } = useSelector((store) => store.authenticate);
   const { users } = useSelector((store) => store.users);
+  const [editUserBool, setEditUserBool] = useState(false)
+  const [bio, setBio]= useState(userProfile.bio)
+  const [website, setWebsite] = useState(userProfile.website)
   const dispatch = useDispatch();
 
   const findUser = (arr) => {
@@ -34,6 +38,14 @@ export const ProfileChild = ({ userProfile }) => {
     );
   };
 
+  const editUserHandler=(e)=>{
+    e.preventDefault()
+    setEditUserBool(prev=>!prev)
+    dispatch(editUser({userData:{bio, website}, encodedToken:token}))
+    setBio(userProfile.bio)
+    setWebsite(userProfile.website)
+  }
+
   let avatar = users.find(
     (userItem) => userItem.username === userProfile.username
   )?.avatar;
@@ -41,7 +53,7 @@ export const ProfileChild = ({ userProfile }) => {
   return (
     <div>
       {/* profile-card */}
-      <div className="profile-container">
+        <div className="profile-container">
         <div className="cover-photo"></div>
         <div className="avatar-round profile-avatar ht-100 wd-100">
           <img className="avatar-image" src={`${avatar}`} />
@@ -55,21 +67,57 @@ export const ProfileChild = ({ userProfile }) => {
               </div>
             </div>
             <div className="profile-header-right">
-              <button className="profile-cta-btn">Edit Profile</button>
+              {
+                currentUser===user.username && 
+                <>
+                  {
+                editUserBool &&
+                <button onClick={editUserHandler} className="profile-cta-btn color-primary">Save Profile</button>
+              }
+              {
+                !editUserBool &&
+                <button onClick={editUserHandler} className="profile-cta-btn">Edit Profile</button>
+              }
+                </>
+              }
+          
             </div>
           </div>
           <div className="profile-body">
-            <div className="profile-bio">{userProfile.bio}</div>
-            <div className="profile-info">
-              <div className="profile-info-child-flex">
-                <a href={`${userProfile.website}`}>{userProfile.website}</a>
+            {
+              editUserBool &&
+              <form onSubmit={editUserHandler} type="submit">
+              <textarea className="edit-delete-post"  value={bio} onChange={(e)=>setBio(e.target.value)}/>
+              <div className="profile-info">
+  
+                <div className="profile-info-child-flex">
+                  <textarea className="edit-delete-post"  value={website} onChange={(e)=>setWebsite(e.target.value)}/>
+                </div>
+  
+                <div className="profile-info-child">
+                  <span className="material-icons">calendar_month</span> Joined
+                  August 2020
+                </div>
               </div>
+            </form>
+            }
+            {
+              !editUserBool &&
+              <>
+               <div className="profile-bio">{userProfile.bio}</div>
+              <div className="profile-info">
+                <div className="profile-info-child-flex">
+                  <span>{userProfile.website}</span>
+                </div>
 
-              <div className="profile-info-child">
-                <span className="material-icons">calendar_month</span> Joined
-                August 2020
+                <div className="profile-info-child">
+                  <span className="material-icons">calendar_month</span> Joined
+                  August 2020
+                </div>
               </div>
-            </div>
+              </>
+            }
+         
           </div>
           <div className="profile-footer">
             <span>10 Followers</span>
@@ -82,7 +130,7 @@ export const ProfileChild = ({ userProfile }) => {
                   </button>
                 )}
                 {!checkUser(findUser(users)) && (
-                  <button onClick={followHandler} className="profile-cta-btn">
+                  <button onClick={followHandler} className="profile-cta-btn color-primary">
                     follow
                   </button>
                 )}

@@ -82,6 +82,11 @@
     flex-direction: column;
 }
 
+.color-primary{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
 .profile-info{
     display: flex;
     align-items: center;
