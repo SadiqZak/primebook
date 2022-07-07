@@ -4,57 +4,53 @@ import { Link } from "react-router-dom";
 import { CommentsTab } from "./component/CommentsTab";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost, editPost, deletePost} from "../../../store/postSlice";
-import { bookmarkPost, removeBookmark, updateCurrUser } from "../../../store/userSlice";
-// import { getUserPosts, getUserProfiles } from "../../../store/profileSlice";
-import { useNavigate } from "react-router-dom";
+import { updateCurrUser } from "../../../store/userSlice";
+import { bookmarkPost, removeBookmark } from "../../../store/authSlice";
 
-export const TextCard = ({
-  hasImage,
-  username,
-  content,
-  date,
-  postId,
-  comments,
-  likes,
-  userId
-}) => {
+export const TextCard = (post) => {
+ let  {
+    hasImage,
+    username,
+    content,
+    date,
+    postId,
+    comments,
+    likes,
+  } = post
   const [clicked, setClicked] = useState(false);
-  const [liked, setLiked] = useState(false);
   const [editPostClick, setEditPostClick]= useState(false)
   const [more, setMore] = useState(false)
   const [textContent, setTextContent] = useState({content:content})
-  const [bookmarked, setBookMarked] = useState(false)
+  const {users, currentUser} = useSelector((store)=>store.users)
   const {token, user} = useSelector((store)=>store.authenticate)
   const dispatch = useDispatch();
-  const {userProfile} = useSelector((store)=>store.profile)
-  const navigate= useNavigate()
-
-
+  
+  const userLiked = ()=> likes.likedBy.filter((likedUser)=>likedUser.username === user.username).length!=0
+  const userBookmarked =()=>user.bookmarks.filter((bookmarkId)=>bookmarkId === postId).length!=0
+ 
   const likedHandler =()=>{
-    if(liked){
+    if(userLiked() ){
       dispatch(dislikePost({postId: postId, encodedToken: token}))
-      setLiked((prev)=>!prev)
     }else{
       dispatch(likePost({postId: postId, encodedToken: token}))
-      setLiked((prev)=>!prev)
     }
-    
   }
 
   const editPostHandler = ()=>{
     setEditPostClick((prev)=>!prev)
-    dispatch(editPost({postId:postId, postData: textContent, encodedToken:token }))
+    dispatch(editPost({postId:postId, postData:textContent, encodedToken:token }))
   }
 
   const bookMarkHandler = ()=>{
-    setBookMarked((prev)=>!prev)
-    dispatch(bookmarkPost({postId, encodedToken:token}))
+    if(userBookmarked()){
+      dispatch(removeBookmark({postId:postId, encodedToken:token}))
+    }else{
+      dispatch(bookmarkPost({postId:postId, encodedToken:token}))
+    }
   }
 
-  const removeBookMarkHandler = ()=>{
-    setBookMarked((prev)=>!prev)
-    dispatch(removeBookmark({postId, encodedToken:token}))
-  }
+  let avatar = users.find((userItem)=>userItem.username===username)?.avatar
+  let mainAvatar = users.find((userItem)=>userItem.username===user.username)?.avatar
 
   return (
     <div>
@@ -63,7 +59,9 @@ export const TextCard = ({
         <div className="text-post-header-wrap">
           <div className="post-header">
           <Link onClick={()=>dispatch(updateCurrUser(username))} className="feedbar-link-tag" to="/profile">
-            <div className="avatar-round wd-50 ht-50"></div>
+            <div className="avatar-round wd-50 ht-50">
+              <img className="avatar-image" src={`${avatar}`}/>
+            </div>
           </Link>
             <div className="username-tag-post">
               <small>{username}</small>
@@ -117,13 +115,13 @@ export const TextCard = ({
         <div className="post-footer">
           <div className="post-footer-child-left">
             {
-              !liked && <span onClick={likedHandler} className="material-icons post-footer-icons">
+              !userLiked()&& <span onClick={likedHandler} className="material-icons post-footer-icons">
               favorite_border
             </span>
             
             }
             {
-              liked && <span onClick={likedHandler} className="material-icons post-footer-icons">
+              userLiked()&& <span onClick={likedHandler} className="material-icons post-footer-icons">
               favorite
             </span>
             }
@@ -145,12 +143,12 @@ export const TextCard = ({
               />
             )}
             {
-              bookmarked && <span onClick={removeBookMarkHandler} className="material-icons post-footer-icons">
+              userBookmarked() && <span onClick={bookMarkHandler} className="material-icons post-footer-icons">
               bookmark
             </span>
             }
             {
-              !bookmarked && <span onClick={bookMarkHandler}  className="material-icons post-footer-icons">
+              !userBookmarked() && <span onClick={bookMarkHandler}  className="material-icons post-footer-icons">
               bookmark_border
             </span>
             }
@@ -163,7 +161,9 @@ export const TextCard = ({
               <div>
                 {comments[0]?.username && (
                   <div className="comment-tab">
-                    <div className="avatar-round ht-20 wd-20"></div>
+                    <div className="avatar-round ht-20 wd-20">
+                    <img className="avatar-image" src={`${mainAvatar}`}/>
+                    </div>
                     <div className="flex-column">
                       {comments[0]?.username}
                       <small> {`@${comments[0]?.username}`}</small>

@@ -10,14 +10,15 @@ export const SidebarFeed = () => {
   const {sortSelectState} = useSelector((store)=>store.timeline)
   const {user} = useSelector((store)=>store.authenticate)
   const {users} = useSelector((store)=>store.users)
-  const {userProfile} = useSelector((store)=>store.profile)
   const dispatch = useDispatch()
 
   useEffect(()=>{
     dispatch(getAllUsers())
-  },[])
+  },[dispatch])
 
-  const feedData = [...users]
+  const feedData = users.filter((currUser)=>{
+    return !user.following.find((currUserInner)=> currUserInner._id === currUser._id) && currUser.username !== user.username
+  })
 
   return (
     <div className='sidebarfeed'>
@@ -32,14 +33,8 @@ export const SidebarFeed = () => {
         </div>
         {feedData.map((feedDataUser)=>(
           user?.username !== feedDataUser.username &&
-          <div key={feedDataUser._id}>
-             {
             feedDataUser.followers[0]?.username !== user?.username &&
             <UserSuggestion key={feedDataUser._id} userId={feedDataUser._id} username={feedDataUser.username} usertag={`@${feedDataUser.username}`}/>
-            }
-          </div>
-         
-          
         ))}
         
       </div>

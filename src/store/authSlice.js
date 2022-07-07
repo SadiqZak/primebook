@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { editUserServices, loginService } from "../services/authService";
+import { bookMarkService, removeBookMarkService } from "../services/userService";
 
 export const authoriseUser = createAsyncThunk("authorisation/authoriseUser",async({username, password})=>{
     try{
@@ -25,12 +26,31 @@ export const editUserProfile = createAsyncThunk(
     }
   );
 
+  export const bookmarkPost = createAsyncThunk('authorisation/bookmarkPost', async({postId, encodedToken})=>{
+    try{
+        const response = await bookMarkService({postId, encodedToken})
+        return response.data.bookmarks
+    }catch(err){
+        console.error(err)
+    }
+  })
+
+  export const removeBookmark = createAsyncThunk('authorisation/removeBookmark', async({postId, encodedToken})=>{
+    try{
+      const response = await removeBookMarkService({postId, encodedToken})
+      return response.data.bookmarks
+    }catch(err){
+      console.error(err)
+  }
+  })
+
 const authSlice = createSlice({
     name:"authorisation",
     initialState:{
         token:JSON.parse(localStorage.getItem('login'))?.token,
         user:JSON.parse(localStorage.getItem('login'))?.user,
-        isAuthenticated:false
+        isAuthenticated:false,
+        currUserBookmark:[]
     },
     reducers:{
         logoutUser: (state) => {
@@ -59,6 +79,18 @@ const authSlice = createSlice({
         },
         [editUserProfile.rejected]:(action)=>{
             console.error(action.payload)
+        },
+        [bookmarkPost.fulfilled]:(state, action)=>{
+            state.user.bookmarks = action.payload
+        },
+        [bookmarkPost.rejected]:(action)=>{
+            console.error(action.payload)
+        },
+        [removeBookmark.fulfilled]:(state, action)=>{
+            state.user.bookmarks = action.payload
+        },
+        [removeBookmark.rejected]:(action)=>{
+          console.error(action.payload)
         }
     }
 })

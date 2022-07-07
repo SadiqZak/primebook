@@ -5,7 +5,8 @@ import { addPostToFeed } from "../../store/postSlice";
 
 export const FeedWall = () => {
   const [postData, setPostData] = useState({ content: "" });
-  const { token } = useSelector((store) => store.authenticate);
+  const {users} = useSelector((store)=>store.users)
+  const { token, user } = useSelector((store) => store.authenticate);
   const dispatch = useDispatch();
 
   const postHandler = (e) => {
@@ -17,12 +18,16 @@ export const FeedWall = () => {
     
   };
 
+  let avatar = users.find((userItem)=>userItem.username===user.username)?.avatar
+
   return (
     <div>
       <form onClick={postHandler}>
         <div className="feed-container">
           <div className="feed-primary">
-            <div className="avatar-round wd-50 ht-50"></div>
+            <div className="avatar-round wd-50 ht-50">
+            <img className="avatar-image" src={`${avatar}`}/>
+            </div>
             <div className="feed-input-cont">
               <textarea
                 value={postData.content}

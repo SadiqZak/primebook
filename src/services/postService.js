@@ -29,7 +29,6 @@ export const getCommentsService = async({postId, encodedToken})=>{
 }
 
 export const likePostService = async({postId, encodedToken})=>{
-    // console.log(postId, encodedToken)
     return axios.post(`/api/posts/like/${postId}`,{}, {
         headers:{
             authorization: encodedToken,
@@ -45,10 +44,10 @@ export const dislikePostService = async({postId, encodedToken})=>{
     })
 }
 
-export const editPostService = async({postId, encodedToken, postData})=>{
+export const editPostService = async({postId,postData, encodedToken})=>{
     return axios.post(`/api/posts/edit/${postId}`,{postData},{
         headers:{
-            authorization:encodedToken
+            authorization: encodedToken
         }
     })
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextCard } from '../../Components/Cards/TextCard/TextCard'
@@ -10,24 +10,25 @@ import Sidebar from '../../Components/Sidebar/Sidebar'
 
 export const Profile = () => {
     const {userPosts, userProfile} = useSelector((store)=>store.profile)
-    const {users} = useSelector((store)=>store.users)
-    const {currentUser} = useSelector((store)=>store.users)
+    const {user} = useSelector((store)=>store.authenticate)
+    const {currentUser, users} = useSelector((store)=>store.users)
+    const [sidebarState, setSidebarState] = useState("Profile")
     const feedData = [...userPosts]
     const dispatch =useDispatch()
 
     useEffect(()=>{
       dispatch(getUserPosts({username:`${currentUser}`}))
       dispatch(getUserProfile({username:`${currentUser}`}))
-    }, [])
+    }, [dispatch])
 
   return (
     <div className="App">
     <Header/>
     <div className='App-body'>
-      <Sidebar/>
+      <Sidebar sidebarState={sidebarState} setSidebarState={setSidebarState}/>
     <div className='middle-container'>
         <div className='middle-child'>
-          <ProfileChild userProfile={userProfile}/>
+          <ProfileChild userProfile={userProfile} currentUser={currentUser}/>
           {/* {userProfile.username} */}
 
         {/* user post */}

@@ -26,7 +26,6 @@ export const addPostToFeed = createAsyncThunk("posts/addPostToFeed", async({post
 export const addComment = createAsyncThunk("posts/addComment", async({postId, commentData, encodedToken})=>{
     try{
         const response = await addCommentService({postId, commentData, encodedToken})
-        console.log(response)
             return response.data.posts
     }catch(err){
          console.error(err)   
@@ -47,6 +46,7 @@ export const likePost = createAsyncThunk('posts/likePost', async({postId, encode
     try{
         const response = await likePostService({postId, encodedToken})
         if(response.status === 201){ //201 is a create status code //HTTP status code 
+            // console.log(response.data.posts)
             return response.data.posts
         }
     }catch(err){
@@ -63,7 +63,7 @@ export const dislikePost = createAsyncThunk('posts/dislikePost', async({postId, 
     }
 })
 
-export const editPost = createAsyncThunk('posts/editPost',async({postData, postId, encodedToken})=>{
+export const editPost = createAsyncThunk('posts/editPost',async({postId, postData, encodedToken})=>{
     try{
         const response = await editPostService({postId, postData, encodedToken})
         return response.data.posts
@@ -107,7 +107,6 @@ const postsSlice = createSlice({
             console.error(action.payload)
         },
         [addComment.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [addComment.rejected]:(action)=>{
@@ -120,21 +119,18 @@ const postsSlice = createSlice({
             console.error(action.payload)
         },
         [likePost.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [likePost.rejected]:(action)=>{
             console.error(action.payload)
         },
         [dislikePost.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [dislikePost.rejected]: (action)=>{
             console.error(action.payload)
         },
         [editPost.fulfilled]:(state, action)=>{
-            console.log(action.payload)
             state.posts = action.payload
         },
         [editPost.rejected]:(action)=>{
