@@ -3,8 +3,16 @@
     padding: 1rem;
 }
 
+@media screen and (max-width:1200px){
+    .sidebarfeed{
+        width: 100%;
+        display: flex;
+        position: fixed;
+        right: -1200px;
+    }
+}
+
 .sidebarfeed-wrapper{
-    margin-right: 6rem;
     position: sticky;
 	top: 93px;
 }
@@ -35,6 +43,7 @@
     justify-content: center;
     align-items: center;
 }
+
 
 .sidebarfeed-button-secondary{
     padding: 0.3rem 0.3rem;

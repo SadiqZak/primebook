@@ -41,6 +41,19 @@
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width:600px){
+    .profile-container{
+        font-size: 0.8rem;
+    }
+    .profile-content{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+    }
+}
 .profile-header{
     padding: 0.5rem 1rem;
     display: flex;
@@ -69,6 +82,11 @@
     flex-direction: column;
 }
 
+.color-primary{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
 .profile-info{
     display: flex;
     align-items: center;
@@ -77,8 +95,15 @@
 
 .profile-info-child{
     display: flex;
+    text-align: right;
+    justify-content: right;
     align-content: center;
     gap: 0.1rem;
+}
+
+.profile-info-child-flex{
+    display: flex;
+    flex-grow: 1;
 }
 .profile-footer{
     padding: 1rem;
