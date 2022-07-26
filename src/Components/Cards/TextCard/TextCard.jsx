@@ -60,7 +60,10 @@ export const TextCard = (post) => {
           <div className="post-header">
           <Link onClick={()=>dispatch(updateCurrUser(username))} className="feedbar-link-tag" to="/profile">
             <div className="avatar-round wd-50 ht-50">
-              <img className="avatar-image" src={`${avatar}`}/>
+            {
+            avatar.length!==0 ? <img className="avatar-image" src={`${avatar}`} />
+            : <div className="avatar-letter">{username[0].toUpperCase()}</div>
+          }
             </div>
           </Link>
             <div className="username-tag-post">

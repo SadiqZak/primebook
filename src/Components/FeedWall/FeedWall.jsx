@@ -18,7 +18,7 @@ export const FeedWall = () => {
     
   };
 
-  let avatar = users.find((userItem)=>userItem.username===user.username)?.avatar
+  let avatar = users.find((userItem)=>userItem.username===user.username)?.avatar || user?.avatar
 
   return (
     <div>
@@ -26,7 +26,10 @@ export const FeedWall = () => {
         <div className="feed-container">
           <div className="feed-primary">
             <div className="avatar-round wd-50 ht-50">
-            <img className="avatar-image" src={`${avatar}`}/>
+            {
+            avatar.length!==0 ? <img className="avatar-image" src={`${avatar}`} />
+            : <div className="avatar-letter">{user.username[0].toUpperCase()}</div>
+          }
             </div>
             <div className="feed-input-cont">
               <textarea
