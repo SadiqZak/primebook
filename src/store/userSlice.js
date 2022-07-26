@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllUserService, followUserServices, bookMarkService, removeBookMarkService, unfollowUserServices } from "../services/userService";
+import { getAllUserService, followUserServices, unfollowUserServices } from "../services/userService";
+import { editUserProfile } from "./authSlice";
 
 export const getAllUsers = createAsyncThunk(`profile/getUsers`, async () => {
   try {
@@ -12,9 +13,10 @@ export const getAllUsers = createAsyncThunk(`profile/getUsers`, async () => {
 
 export const followUser = createAsyncThunk(
   "users/followUser",
-  async ({ followUserId, encodedToken }) => {
+  async ({ followUserId, encodedToken, dispatch }) => {
     try {
       const response = await followUserServices({followUserId, encodedToken});
+      dispatch(editUserProfile({userData:response.data.user, encodedToken:encodedToken}))
       return response.data;
     } catch (err) {
       console.error(err);
@@ -24,9 +26,10 @@ export const followUser = createAsyncThunk(
 
 export const unfollowUser = createAsyncThunk(
   "users/unfollowUser",
-  async ({followUserId, encodedToken}) =>{
+  async ({followUserId, encodedToken, dispatch}) =>{
     try{
       const response = await unfollowUserServices({followUserId, encodedToken})
+      dispatch(editUserProfile({userData:response.data.user, encodedToken:encodedToken}))
       return response.data
     }catch(err){
       console.error(err)

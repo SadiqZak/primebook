@@ -28,13 +28,13 @@ export const ProfileChild = ({ userProfile , currentUser}) => {
 
   const unfollowHandler = () => {
     dispatch(
-      unfollowUser({ followUserId: userProfile._id, encodedToken: token })
+      unfollowUser({ followUserId: userProfile._id, encodedToken: token, dispatch })
     );
   };
 
   const followHandler = () => {
     dispatch(
-      followUser({ followUserId: userProfile._id, encodedToken: token })
+      followUser({ followUserId: userProfile._id, encodedToken: token, dispatch })
     );
   };
 
@@ -48,7 +48,7 @@ export const ProfileChild = ({ userProfile , currentUser}) => {
 
   let avatar = users.find(
     (userItem) => userItem.username === userProfile.username
-  )?.avatar;
+  )?.avatar || userProfile?.avatar;
 
   return (
     <div>
@@ -56,7 +56,10 @@ export const ProfileChild = ({ userProfile , currentUser}) => {
         <div className="profile-container">
         <div className="cover-photo"></div>
         <div className="avatar-round profile-avatar ht-100 wd-100">
-          <img className="avatar-image" src={`${avatar}`} />
+          {
+            avatar?.length!==0 ? <img className="avatar-image" src={`${avatar}`} />
+            : <div className="avatar-letter-large">{userProfile.username[0].toUpperCase()}</div>
+          }
         </div>
         <div className="profile-content">
           <div className="profile-header">

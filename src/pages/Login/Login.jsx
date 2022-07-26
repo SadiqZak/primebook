@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authoriseUser } from "../../store/authSlice";
 import "./Login.css";
 
@@ -64,6 +64,7 @@ const Login = () => {
             <button onClick={guestLoginHandler} className="login-btn">
               Login as a guest
             </button>
+            <div>Don't have an account? <Link to='/signup'>Sign up here</Link> </div>
           </div>
         </div>
       </div>

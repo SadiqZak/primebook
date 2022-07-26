@@ -13,6 +13,7 @@ import { Explore } from './pages/Explore/Explore';
 import { LikedPosts } from './pages/LikedPosts/LikedPosts';
 import { Bookmarks } from './pages/Bookmarks/Bookmarks';
 import { useSelector } from 'react-redux';
+import Signup from './pages/Signup/Signup';
 
 function MockAPI() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/bookmark" element={token ?<Bookmarks/> : <Login/>}/>
         <Route path="/profile" element = {token ? <Profile/> : <Login/>}/>
         <Route path="/login" element = {<Login/>}/>
+        <Route path="/signup" element = {<Signup/>}/>
         <Route path="/mockman" element = {<Mockman/>}/>
       </Routes>     
     </>

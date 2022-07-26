@@ -12,7 +12,7 @@ const Header = () => {
   const {users}= useSelector((store)=>store.users)
   const dispatch = useDispatch();
 
-  let avatar = users.find((userItem)=>userItem.username===user.username)?.avatar
+  let avatar = users.find((userItem)=>userItem.username===user.username)?.avatar || user?.avatar
 
   return (
     <div className="header">
@@ -29,7 +29,10 @@ const Header = () => {
               to="/profile"
             >
               <div className="avatar-round ht-35 wd-35">
-              <img className="avatar-image" src={`${avatar}`}/>
+              {
+            avatar.length!==0 ? <img className="avatar-image" src={`${avatar}`} />
+            : <div className="avatar-letter">{user.username[0].toUpperCase()}</div>
+          }
               </div>
             </Link>
             {token && (

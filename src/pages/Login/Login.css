@@ -5,6 +5,10 @@
     display: flex;
 }
 
+.pd-tp-1{
+    padding: 1rem 0 0 0;
+}
+
 .login-right{
     display: flex;
     justify-content: center;
